@@ -6,7 +6,7 @@
 
 ## Test Credentials
 
-- **Email:** bi@hrvn.vn
+- **Email:** admin@example.com
 - **Password:** Test1234!
 - **API Key:** lak_your_api_key_here
 
@@ -28,7 +28,7 @@
 
 ### 🔍 Search
 - Full-text search across legal documents
-- Domain filtering (lao_dong, doanh_nghiep, dan_su, etc.)
+- Domain filtering (labour, corporate, civil, constitutional, etc.)
 - Expandable result cards
 - Relevance scoring
 - Law name, article, and content preview

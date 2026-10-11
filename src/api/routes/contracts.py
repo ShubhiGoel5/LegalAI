@@ -149,7 +149,7 @@ TASK: Analyze EACH clause in the contract in DETAIL according to the following c
 1. **CLAUSE-BY-CLAUSE ANALYSIS**: Read and evaluate each specific clause. Identify which clauses are favorable/unfavorable for each party.
 
 2. **LEGAL COMPLIANCE CHECK**: 
-   - Compare with IR Code (if it's an employment contract): probation period, minimum wage, working hours, leave, social insurance, unilateral termination, dismissal.
+   - Compare with IR Code (if it's an employment contract): probation period, minimum wage, working hours, leave, social security (EPF/ESI, gratuity), unilateral termination, dismissal.
    - Compare with Indian Contract Act 1872: contract validity, void contracts, penalties, damages.
    - Relevant specialized laws.
 

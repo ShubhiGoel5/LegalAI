@@ -9,6 +9,6 @@ We are committed to making participation in this project a harassment-free exper
 - Focus on what is best for the community
 
 ## Enforcement
-Report issues to hieu766886@gmail.com.
+Report issues to the maintainers via [GitHub](https://github.com/ShubhiGoel5/LegalAI/issues).
 
 Adapted from the [Contributor Covenant](https://www.contributor-covenant.org/).

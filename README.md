@@ -4,9 +4,9 @@
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python"></a>
 </p>
 
-🇮🇳 [Hindi](README_HI.md) | 🇺🇸 English
+🇮🇳 Made in India
 
-**AI-powered legal assistant for Indiaese businesses**
+**AI-powered legal assistant for Indian businesses, grounded in the Constitution of India and Indian statutes**
 
 An AI platform for legal research, contract review, and legal document drafting — all in a VSCode-style interface.
 
@@ -21,9 +21,9 @@ An AI platform for legal research, contract review, and legal document drafting 
 ## ✨ Features
 
 ### 🤖 AI Agent (24 Tools)
-- **Legal search** — Search across 40,000+ Indiaese legal documents
+- **Legal search** — Search across the Constitution of India, Central Acts, IPC/BNS and other Indian legal documents
 - **Contract review** — Risk analysis, missing clauses, amendment suggestions
-- **Compliance check** — Verify labor/commercial/service contracts against Indiaese law
+- **Compliance check** — Verify employment/commercial/service contracts against Indian law
 - **Clause drafting** — Generate confidentiality, penalty, termination, force majeure clauses...
 - **Contract summary** — Quick summary of parties, value, duration
 - **Contract comparison** — Side-by-side diff of 2 contracts
@@ -98,18 +98,18 @@ AI:
 Upload contracts for instant AI-powered review:
 
 - ⚠️ **Risk identification and scoring** — 10 risk categories analyzed
-- ⚖️ **Indiaese law compliance check** — Civil Code, Commercial Law, Labor Law
+- ⚖️ **Indian law compliance check** — Indian Contract Act 1872, Labour Codes 2020, Companies Act 2013
 - 💡 **Revision suggestions** — Specific amendments with legal references
 - 📊 **Clause-by-clause analysis** — Risk levels: LOW / MEDIUM / HIGH / CRITICAL
-- 📄 **8+ contract templates** — Ready-to-use Indiaese templates
+- 📄 **8+ contract templates** — Ready-to-use Indian templates
 
 ### Risk Categories Analyzed
 
 1. **Unfavorable clauses** — One-sided clauses favoring one party
-2. **High violation penalty** — Excessive penalty clauses (>8% per Indiaese law)
+2. **High violation penalty** — Penalty/liquidated damages beyond reasonable compensation (Section 74, Indian Contract Act 1872)
 3. **Unreasonable duration** — Unreasonable deadlines/terms
 4. **Missing protective clauses** — Missing protective clauses
-5. **Conflict with law** — Clauses contradicting Indiaese law
+5. **Conflict with law** — Clauses contradicting Indian law (e.g. void restraints of trade under Section 27, Indian Contract Act)
 6. **Auto-renewal clauses** — Auto-renewal traps
 7. **Liability limitations** — Liability limitations
 8. **Confidentiality and IP** — IP/confidentiality issues
@@ -222,7 +222,7 @@ https://your-domain.com/platform-admin
 
 # Available stats:
 - Total companies, users, documents, contracts
-- Indiaese law database size (60K+ documents, 117K+ chunks)
+- Indian law database size (documents and chunks indexed)
 - Daily/monthly query volumes
 - Active users, storage usage
 - Usage trends (30-day charts)
@@ -249,11 +249,11 @@ https://your-domain.com/platform-admin
 - Keyboard shortcuts
 
 ### 🕷️ Data Crawler (Powered by CrawlKit)
-Legal AI Agent can automatically crawl Indiaese legal websites to build and update your document database.
+Legal AI Agent can automatically crawl Indian legal websites to build and update your document database.
 
 #### Supported Sources
-- 📚 **India Code** (indiacode.nic.in) — Largest Indiaese legal document database
-- 🏛️ **India Code** (indiacode.nic.in) — Official government legal portal
+- 📚 **India Code** (indiacode.nic.in) — Official repository of Central and State Acts
+- 🏛️ **Legislative Department** (legislative.gov.in) — Constitution of India and Acts of Parliament
 - 📰 **Gazette of India** (egazette.nic.in) — Official Gazette of India
 - 🌐 **Any legal website URL** — Custom legal document sources
 
@@ -271,13 +271,13 @@ Legal AI Agent can automatically crawl Indiaese legal websites to build and upda
 ```bash
 POST /crawler/crawl
 {
-  "url": "https://indiacode.nic.in/van-ban/..."
+  "url": "https://www.indiacode.nic.in/handle/123456789/..."
 }
 ```
 
 **Via AI Chat:**
 ```
-"Crawl vn bn ti https://indiacode.nic.in/van-ban/123"
+"Crawl the Act at https://www.indiacode.nic.in/handle/123456789/1362"
 ```
 
 **Other endpoints:**
@@ -322,7 +322,8 @@ cp .env.example .env
 # Run migrations
 python scripts/run_migration.py
 
-# Load Indiaese law data (optional, ~40K documents)
+# Load Indian law data (optional: Constitution of India, IPC)
+python scripts/download_indian_datasets.py
 python scripts/load_law_data.py
 python scripts/index_chunks.py
 ```
@@ -488,18 +489,18 @@ GET /v1/pricing  # Get pricing tiers
 
 ## 📄 Contract Templates
 
-8 ready-to-use Indiaese contract templates:
+8 ready-to-use Indian contract templates:
 
 | Template | Law Reference |
 |----------|--------------|
-| Employment Contract | Industrial Disputes Act 1947 |
-| Lease Agreement | Indian Contract Act 1872 |
-| Sale Contract | Companies Act 2013 |
-| Service Contract | Indian Contract Act 1872 |
-| Business Cooperation (BCC) | Companies Act 2013 |
-| NDA / Bo mt | Copyright Act 1957 |
-| Loan Contract | Indian Contract Act 1872 |
-| Agency Contract | Companies Act 2013 |
+| Employment Agreement | Code on Social Security 2020, OSH Code 2020 |
+| Lease Agreement | Transfer of Property Act 1882 |
+| Sale Agreement | Sale of Goods Act 1930 |
+| Service Agreement | Indian Contract Act 1872, Income Tax Act 1961 (TDS) |
+| Partnership Agreement | Indian Partnership Act 1932 |
+| Non-Disclosure Agreement | Indian Contract Act 1872, IT Act 2000 |
+| Loan Agreement | Indian Contract Act 1872, Negotiable Instruments Act 1881 |
+| Agency Agreement | Indian Contract Act 1872 (Sections 182–238) |
 
 All templates include `{{fillable_fields}}`, legal notes, and specific law article references.
 
@@ -511,14 +512,14 @@ POST /v1/templates/generate    # AI-fill template
 
 ## 🌐 Multi-Language (i18n)
 
-Support Indiaese and English:
+English is the default. Hindi (`hi`) is supported by the language detector; add `src/i18n/hi.json` to provide translations.
 
 ```bash
-# Indiaese (default)
-curl -H "Accept-Language: vi" /v1/pricing
+# English (default)
+curl "/v1/pricing?lang=en"
 
-# English
-curl -H "Accept-Language: en" /v1/pricing
+# Hindi
+curl "/v1/pricing?lang=hi"
 ```
 
 ## 🛠️ Tech Stack
@@ -530,21 +531,23 @@ curl -H "Accept-Language: en" /v1/pricing
 - **Frontend:** Vanilla JS SPA (single HTML file)
 - **Deploy:** Railway / Docker / any container host
 
-## 📝 Indiaese Law Database
+## 📝 Indian Law Database
 
-The search engine indexes Indiaese legal documents including:
-- Labor Code 2019 (Code Lao ng)
-- Civil Code 2015 (Code Dn s)
-- Enterprise Law 2020 (Lut Doanh nghip)
-- Commercial Law 2005 (Lut Thng mi)
-- Corporate Income Tax, Personal Income Tax, VAT Laws
-- And 40,000+ more...
+The search engine indexes Indian legal documents including:
+- The Constitution of India (Preamble, Parts, Articles and Schedules)
+- Indian Penal Code 1860 / Bharatiya Nyaya Sanhita 2023
+- Indian Contract Act 1872
+- Companies Act 2013
+- The four Labour Codes (Wages 2019, Industrial Relations 2020, Social Security 2020, OSH 2020)
+- Income Tax Act 1961 and CGST Act 2017
+- Information Technology Act 2000 and Digital Personal Data Protection Act 2023
+- And more Central Acts, Rules and Notifications from India Code
 
 ## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Areas that need help:
-- [ ] More Indiaese legal document sources
-- [ ] Better NLP for Indiaese text
+- [ ] More Indian legal document sources (State Acts, Supreme Court and High Court judgments)
+- [ ] Better NLP for Hindi and other Indian languages
 - [ ] Test coverage
 - [ ] Multi-language support
 

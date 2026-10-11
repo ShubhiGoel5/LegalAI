@@ -38,7 +38,7 @@ CREATE TABLE companies (
   
   -- Settings
   settings JSONB DEFAULT '{
-    "default_language": "vi",
+    "default_language": "en",
     "notification_email": null,
     "webhook_url": null,
     "allowed_domains": [],
@@ -48,7 +48,7 @@ CREATE TABLE companies (
   -- Metadata
   industry TEXT,  -- manufacturing, retail, tech, etc.
   employee_count INT,
-  tax_code TEXT,  -- M number thu
+  tax_code TEXT,  -- GSTIN / PAN
   
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
@@ -88,30 +88,33 @@ CREATE INDEX idx_api_keys_prefix ON api_keys(key_prefix);
 -- ============================================
 
 CREATE TYPE law_type AS ENUM (
-  'hien_phap',    -- Constitution
-  'bo_luat',      -- Code (Code)
-  'luat',         -- Law (Lut)
-  'nghi_dinh',    -- Decree (Decree)
-  'thong_tu',     -- Circular (Circular)
-  'ruleet_dinh',   -- Decision (Decision)
-  'nghi_ruleet',   -- Resolution (Ngh rulet)
-  'cong_van',     -- Official dispatch
+  'constitution', -- Constitution of India
+  'act',          -- Act of Parliament / State Legislature
+  'rules',        -- Rules framed under an Act
+  'regulation',   -- Regulations (e.g. SEBI, RBI)
+  'notification', -- Government notifications
+  'order',        -- Government orders
+  'ordinance',    -- Ordinance (Article 123 / 213)
+  'circular',     -- Ministry / regulator circulars
+  'gazette',      -- Gazette of India publications
   'other'
 );
 
 CREATE TYPE law_status AS ENUM ('active', 'expired', 'amended', 'repealed', 'pending');
 CREATE TYPE legal_domain AS ENUM (
-  'lao_dong',     -- Labor
-  'doanh_nghiep', -- Enterprise
-  'dan_su',       -- Civil
-  'thuong_mai',   -- Commercial
-  'thue',         -- Tax
-  'dat_dai',      -- Land
-  'dau_tu',       -- Investment
-  'bhxh',         -- Social insurance
-  'atvs_ld',      -- Occupational safety
-  'so_huu_tri_tue', -- Intellectual property
-  'hinh_su',      -- Criminal (reference only)
+  'labour',         -- Labour Codes, Shops & Establishments
+  'corporate',      -- Companies Act 2013, LLP Act 2008
+  'civil',          -- Contract Act 1872, CPC
+  'criminal',       -- BNS 2023 / IPC 1860 (reference only)
+  'tax',            -- Income Tax Act 1961, GST
+  'property',       -- Transfer of Property Act 1882, RERA
+  'consumer',       -- Consumer Protection Act 2019
+  'it_cyber',       -- IT Act 2000, DPDP Act 2023
+  'ip',             -- Copyright, Patents, Trade Marks
+  'constitutional', -- Constitution of India
+  'banking',        -- RBI, Banking Regulation Act
+  'environmental',  -- Environment (Protection) Act 1986
+  'family',         -- Personal laws
   'other'
 );
 
@@ -120,11 +123,11 @@ CREATE TABLE law_documents (
   
   -- Identification
   title TEXT NOT NULL,
-  law_number TEXT NOT NULL,  -- "45/2019/QH14"
+  law_number TEXT NOT NULL,  -- "Act No. 18 of 2013"
   law_type law_type NOT NULL,
   
   -- Authority
-  issuer TEXT NOT NULL,  -- "Quc hi", "Chnh ph", "B LTBXH"
+  issuer TEXT NOT NULL,  -- "Parliament of India", "Ministry of Labour and Employment"
   signer TEXT,  -- Person who signed
   
   -- Dates
@@ -145,7 +148,7 @@ CREATE TABLE law_documents (
   
   -- Source
   source_url TEXT,
-  source_site TEXT,  -- 'thuvienphapluat', 'luatindia'
+  source_site TEXT,  -- 'indiacode', 'legislative_gov', 'egazette'
   
   -- Metadata
   article_count INT,

@@ -6,7 +6,7 @@ Add these topics to the repository via GitHub web UI:
 ```
 ai
 legal
-vietnam
+india
 fastapi
 claude
 nlp

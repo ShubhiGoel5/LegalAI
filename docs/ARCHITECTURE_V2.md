@@ -1,25 +1,25 @@
 # Legal AI Platform v2 — Full Legal Department Replacement
 
-> **Tm nhn:** Thay th hon ton b phn php l truyn thng trong doanh nghip.
-> Khng ch chatbot — m l mt **Legal Operating System**.
+> **Vision:** Fully replace the traditional in-house legal function for Indian businesses — grounded in the Constitution of India, Acts of Parliament, State Acts, Rules, Regulations and Notifications.
+> Not just a chatbot — a **Legal Operating System**. Made in India, for Indian law.
 
 ---
 
 ## 1. Product Vision
 
 ```
-TRC (Truyn thng):                    SAU (Legal AI Platform):
+BEFORE (Traditional):                    AFTER (Legal AI Platform):
                                          
-Thu lut s ─── 15-50tr/thng          ┌─────────────────────────┐
-Hire Legal Staff ── 10-20tr/thng        │   LEGAL AI PLATFORM     │
+Law firm retainer ── ₹50K-2L/month       ┌─────────────────────────┐
+In-house legal staff ── ₹40K-1L/month    │   LEGAL AI PLATFORM     │
                                          │                         │
-Son H ──── 2-3 day                   │   Son H ── 5 pht    │
-Review H ── 1-2 day                   │   Review ─── 30 giy    │
-Tra cu lut ── vi gi                 │   Tra cu ── tc th    │
-Son ni rule ── 1 tun                  │   Ni rule ── 10 pht    │
-T vn ───── t lch, ch             │   T vn ─── 24/7       │
+Draft contract ──── 2-3 days             │   Draft ──── 5 minutes  │
+Review contract ── 1-2 days              │   Review ─── 30 seconds │
+Legal research ── several hours          │   Research ── instant   │
+Draft HR policies ── 1 week              │   Policies ── 10 min    │
+Advice ───── book appointment, wait      │   Advice ─── 24/7       │
                                          │                         │
-Chi ph: 30-70tr/thng                   │   Chi ph: 3-8tr/thng  │
+Cost: ₹1L-3L/month                       │   Cost: ₹10K-25K/month  │
                                          └─────────────────────────┘
 ```
 
@@ -33,126 +33,127 @@ Chi ph: 30-70tr/thng                   │   Chi ph: 3-8tr/thng  │
 │                                                             │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐   │
 │  │  📄 DRAFT    │  │  🔍 REVIEW   │  │  💬 CONSULT      │   │
-│  │  Son tho   │  │  R sot     │  │  T vn          │   │
-│  │  vn bn     │  │  hp ng    │  │  php l         │   │
+│  │  Document    │  │  Contract    │  │  Legal           │   │
+│  │  drafting    │  │  review      │  │  advice          │   │
 │  └──────────────┘  └──────────────┘  └──────────────────┘   │
 │                                                             │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐   │
 │  │  📚 LIBRARY  │  │  ✅ COMPLY   │  │  📊 MANAGE       │   │
-│  │  Th vin    │  │  Tun th    │  │  Qun l         │   │
-│  │  mu & lut  │  │  php lut   │  │  vn bn DN      │   │
+│  │  Templates & │  │  Legal       │  │  Company         │   │
+│  │  laws        │  │  compliance  │  │  documents       │   │
 │  └──────────────┘  └──────────────┘  └──────────────────┘   │
 │                                                             │
 │  ┌──────────────┐  ┌──────────────┐                         │
 │  │  🔄 BATCH    │  │  🔌 API      │                         │
-│  │  X l      │  │  Tch hp    │                         │
-│  │  hng lot   │  │  h thng    │                         │
+│  │  Bulk        │  │  System      │                         │
+│  │  processing  │  │  integration │                         │
 │  └──────────────┘  └──────────────┘                         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Module 1: DRAFT (Son tho)
-**Thay th:** Lut s son hp ng, admin son vn bn
+### Module 1: DRAFT
+**Replaces:** Lawyers drafting contracts, admin staff drafting documents
 ```
-Input:  Loi vn bn + thng tin cn thit
-Output: Vn bn hon chnh (Word/PDF), ng php lut
+Input:  Document type + required details
+Output: Complete document (Word/PDF), compliant with Indian law
 
-H tr:
-├── Hp ng (lao ng, dch v, mua bn, thu, hp tc, i l)
-├── Ph lc (gia hn, sa i, b sung, thanh l)
-├── Vn bn ni b (ni rule, rule ch, rulet regulation, thng bo, bin bn)
-├── Vn bn i ngoi (cng vn, giy y rulen, n khiu ni)
-├── HR documents (HL, rulet regulation lng, k lut, sa thi, BHXH)
-└── Bo co php l (tun th, r sot, nh gi ri ro)
-```
-
-### Module 2: REVIEW (R sot)
-**Thay th:** Lut s review hp ng
-```
-Input:  File hp ng (PDF/Word/nh)
-Output: Bo co ri ro +  xut sa i
-
-Chc nng:
-├── Pht hin iu khon vi phm php lut
-├── Highlight iu khon bt li
-├── Kim tra thiu st (iu khon bt buc)
-├── So snh vi template chun
-├──  xut sa i c th
-├── Chm im ri ro (0-100)
-└── To redline version (markup thay i)
+Supports:
+├── Contracts (employment, services, sale of goods, lease, joint venture, agency/distribution)
+├── Addenda (extension, amendment, supplement, settlement/closure)
+├── Internal documents (standing orders, HR policies, office orders, notices, minutes)
+├── External documents (official letters, powers of attorney, complaints)
+├── HR documents (appointment letters, salary revisions, disciplinary action, termination, EPF/ESI)
+└── Legal reports (compliance, audits, risk assessment)
 ```
 
-### Module 3: CONSULT (T vn)
-**Thay th:** Lut s t vn, hotline php l
+### Module 2: REVIEW
+**Replaces:** Lawyers reviewing contracts
 ```
-Input:  Cu hi php l (text/voice)
-Output: Cu tr li + trch dn iu lut c th
+Input:  Contract file (PDF/Word/image)
+Output: Risk report + suggested amendments
 
-Chc nng:
-├── Q&A php lut 37+ lnh vc
-├── Trch dn iu lut chnh xc
-├── Phn tch tnh hung c th
-├── Gi  hnh ng tip theo
-├── Lch s t vn (audit trail)
-└── Multi-language (VN/EN/CN/KR/JP)
+Functions:
+├── Detect clauses that violate the law (e.g. void restraints under Section 27, Indian Contract Act 1872)
+├── Highlight unfavourable clauses (e.g. penalty clauses — Section 74, Indian Contract Act 1872)
+├── Check for omissions (mandatory clauses, stamp duty, GST/TDS terms)
+├── Compare against standard templates
+├── Suggest specific amendments
+├── Risk scoring (0-100)
+└── Generate redline version (tracked changes)
 ```
 
-### Module 4: LIBRARY (Th vin)
-**Thay th:** T sch php lut, dch v tra cu
+### Module 3: CONSULT
+**Replaces:** Legal consultants, legal helplines
 ```
-├── 600+ vn bn php lut VN (Lut, N, TT)
-├── Template library (50+ mu vn bn)
+Input:  Legal question (text/voice)
+Output: Answer + precise citations of the relevant provisions
+
+Functions:
+├── Legal Q&A across 37+ practice areas
+├── Accurate citation of Articles of the Constitution, sections of Acts, Rules
+├── Fact-specific situation analysis
+├── Suggested next steps
+├── Consultation history (audit trail)
+└── Multi-language (English/Hindi + regional Indian languages)
+```
+
+### Module 4: LIBRARY
+**Replaces:** Legal bookshelf, paid legal research services
+```
+├── 600+ Indian legal texts (Constitution of India, Central & State Acts, Rules, Regulations,
+│   Notifications, Circulars from RBI/SEBI/MCA)
+├── Template library (50+ document templates)
 ├── Smart search (semantic + keyword)
-├── Cross-reference (lut lin quan)
-├── Version tracking (lut sa i)
+├── Cross-reference (related laws)
+├── Version tracking (amendments)
 ├── Bookmark & highlight
-└── Auto-update khi lut mi ban hnh
+└── Auto-update when new laws are notified in the Gazette of India
 ```
 
-### Module 5: COMPLY (Tun th)
-**Thay th:** Kim ton php l
+### Module 5: COMPLY
+**Replaces:** Legal compliance audits
 ```
-Input:  Thng tin doanh nghip (ngnh, rule m, hot ng)
-Output: Checklist tun th + cnh bo vi phm
+Input:  Company information (industry, size, operations, state)
+Output: Compliance checklist + violation alerts
 
-Chc nng:
-├── Compliance checklist theo ngnh
-├── Deadline nhc nh (bo co thu, BHXH, PCCC)
-├── Scanning ni rule vs lut hin hnh
-├── Alert khi lut mi nh hng DN
-└── Bo co tun th regulation k
-```
-
-### Module 6: MANAGE (Qun l)
-**Thay th:** T h s, Excel tracking
-```
-├── Kho vn bn DN (upload, phn loi, search)
-├── Tracking hp ng (ht hn, gia hn)
-├── Qun l phin bn (ai sa, khi no)
-├── Workflow ph duyt (draft → review → approve)
-├── Nhc nh deadline (hp ng sp ht, giy php ht hn)
-└── Bo co tng hp (bao nhiu H, trng thi)
+Functions:
+├── Industry-specific compliance checklist
+├── Deadline reminders (GST, TDS, EPF/ESI, fire safety)
+├── Scan internal policies against current law
+├── Alerts when new laws affect the company
+└── Periodic compliance reports
 ```
 
-### Module 7: BATCH (X l hng lot)
-**Thay th:** Admin/HR son hng trm HL
+### Module 6: MANAGE
+**Replaces:** Filing cabinets, Excel tracking
 ```
-Input:  Template + Excel data (tn, lng, v tr...)
-Output: Hng lot vn bn hon chnh
+├── Company document repository (upload, classify, search)
+├── Contract tracking (expiry, renewal)
+├── Version control (who changed what, when)
+├── Approval workflow (draft → review → approve)
+├── Deadline reminders (contracts expiring, licences expiring)
+└── Summary reports (number of contracts, status)
+```
+
+### Module 7: BATCH
+**Replaces:** Admin/HR drafting hundreds of employment contracts
+```
+Input:  Template + Excel data (name, salary, position...)
+Output: Complete documents in bulk
 
 Use cases:
-├── 500 HL cho cng nhn mi (HRVN!)
-├── 200 ph lc gia hn
-├── 100 rulet regulation tng lng
-├── 50 thng bo ngh vic
+├── 500 appointment letters for new workers
+├── 200 contract extension addenda
+├── 100 salary revision letters
+├── 50 termination notices
 └── Batch export Word/PDF
 ```
 
-### Module 8: API (Tch hp)
+### Module 8: API
 ```
 REST API + WebSocket + SDK
-├── Tch hp vo ERP/HRM hin c
-├── Webhook events (H ht hn, lut mi)
+├── Integrate with existing ERP/HRM systems
+├── Webhook events (contract expiry, new laws)
 ├── Embeddable chat widget
 ├── Mobile SDK (iOS/Android)
 └── Zapier / n8n integration
@@ -195,11 +196,11 @@ REST API + WebSocket + SDK
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐     │
 │  │              INTENT ROUTER                               │     │
-│  │  "Son hp ng lao ng" → DRAFT agent                │     │
-│  │  "Review file ny" → REVIEW agent                       │     │
-│  │  "Thai sn bao lu?" → CONSULT agent                   │     │
-│  │  "To 500 HL t Excel" → BATCH agent                 │     │
-│  │  "Cng ty ti cn tun th g?" → COMPLY agent         │     │
+│  │  "Draft an employment contract" → DRAFT agent           │     │
+│  │  "Review this file" → REVIEW agent                      │     │
+│  │  "How long is maternity leave?" → CONSULT agent         │     │
+│  │  "Create 500 offer letters from Excel" → BATCH agent    │     │
+│  │  "What must my company comply with?" → COMPLY agent     │     │
 │  └─────────────────────────────────────────────────────────┘     │
 │                                                                 │
 │  ┌────────────────── AGENT POOL ──────────────────────────┐     │
@@ -256,8 +257,8 @@ REST API + WebSocket + SDK
 │  │  │  Tenants    │  │  Law DB      │  │  pgvector        │  │   │
 │  │  │  (companies │  │  (636+ docs) │  │  (embeddings)    │  │   │
 │  │  │  users,     │  │              │  │                  │  │   │
-│  │  │  docs, H)  │  │  Lut, N,  │  │  law_chunks      │  │   │
-│  │  │             │  │  TT, Q     │  │  company_chunks  │  │   │
+│  │  │  docs,      │  │  Constitution│  │  law_chunks      │  │   │
+│  │  │  contracts) │  │  Acts, Rules │  │  company_chunks  │  │   │
 │  │  │  RLS        │  │              │  │  template_chunks │  │   │
 │  │  │  isolated   │  │  PUBLIC READ │  │                  │  │   │
 │  │  └─────────────┘  └──────────────┘  └──────────────────┘  │   │
@@ -286,7 +287,7 @@ REST API + WebSocket + SDK
 │  │  They are INTELLIGENT SCHEMAS:                            │   │
 │  │                                                           │   │
 │  │  ┌─────────────────────────────────────────────┐          │   │
-│  │  │  Template: "hop_dong_lao_dong"               │          │   │
+│  │  │  Template: "employment_contract"            │          │   │
 │  │  │                                             │          │   │
 │  │  │  Sections:                                  │          │   │
 │  │  │  ├── header (company info, date, number)    │          │   │
@@ -295,7 +296,7 @@ REST API + WebSocket + SDK
 │  │  │  ├── term (duration, start date)            │          │   │
 │  │  │  ├── salary (base, allowance, bonus)        │          │   │
 │  │  │  ├── working_hours (schedule, overtime)     │          │   │
-│  │  │  ├── insurance (BHXH, BHYT, BHTN)           │          │   │
+│  │  │  ├── insurance (EPF, ESI, gratuity)         │          │   │
 │  │  │  ├── leave (annual, sick, maternity)        │          │   │
 │  │  │  ├── obligations (employer + employee)      │          │   │
 │  │  │  ├── termination (conditions, notice)       │          │   │
@@ -303,8 +304,8 @@ REST API + WebSocket + SDK
 │  │  │  └── signatures                             │          │   │
 │  │  │                                             │          │   │
 │  │  │  Required by law: [term, salary, insurance] │          │   │
-│  │  │  Legal refs: [iu 21-24 BLL 2019]        │          │   │
-│  │  │  Compliance rules: [max 36 months, ...]     │          │   │
+│  │  │  Legal refs: [Contract Act, Code on Wages]  │          │   │
+│  │  │  Compliance rules: [min wage, 48h/week, ...]│          │   │
 │  │  └─────────────────────────────────────────────┘          │   │
 │  └───────────────────────────────────────────────────────────┘   │
 │                                                                 │
@@ -314,10 +315,10 @@ REST API + WebSocket + SDK
 │  │  ① Collect Variables                                      │   │
 │  │  ┌─────────────────────────────────┐                      │   │
 │  │  │ Interactive Q&A or API params:  │                      │   │
-│  │  │ - company_name: "HRVN"          │                      │   │
-│  │  │ - employee_name: "Nguyn Vn A" │                      │   │
-│  │  │ - position: "Cng nhn sn xut"│                      │   │
-│  │  │ - salary: 6500000               │                      │   │
+│  │  │ - company_name: "Acme Pvt Ltd"  │                      │   │
+│  │  │ - employee_name: "Rahul Sharma" │                      │   │
+│  │  │ - position: "Production Worker" │                      │   │
+│  │  │ - salary: 18000                 │                      │   │
 │  │  │ - term_months: 12               │                      │   │
 │  │  └─────────────────────────────────┘                      │   │
 │  │                    │                                      │   │
@@ -325,9 +326,9 @@ REST API + WebSocket + SDK
 │  │  ② Validate & Enrich                                     │   │
 │  │  ┌─────────────────────────────────┐                      │   │
 │  │  │ - Salary >= minimum wage? ✅     │                      │   │
-│  │  │ - Term <= 36 months? ✅          │                      │   │
+│  │  │ - Hours <= 48/week? ✅           │                      │   │
 │  │  │ - Required fields present? ✅    │                      │   │
-│  │  │ - Auto-calculate BHXH rates     │                      │   │
+│  │  │ - Auto-calculate EPF/ESI rates  │                      │   │
 │  │  │ - Auto-add required clauses     │                      │   │
 │  │  └─────────────────────────────────┘                      │   │
 │  │                    │                                      │   │
@@ -375,18 +376,18 @@ REST API + WebSocket + SDK
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                  BATCH PROCESSING ENGINE                         │
-│          "To 500 HL trong 10 pht"                          │
+│          "500 employment contracts in 10 minutes"               │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐   │
 │  │  Input: Excel/CSV + Template                              │   │
 │  │                                                           │   │
 │  │  Excel columns mapping:                                   │   │
 │  │  ┌──────────────────────────────────────────────────┐     │   │
-│  │  │ H tn    │ Date of Birth │ CCCD        │ V tr    │     │   │
-│  │  │ Nguyn A  │ 01/01/90  │ 079190xxx  │ CN sn xut│     │   │
-│  │  │ Trn B    │ 15/03/95  │ 052195xxx  │ QC         │     │   │
-│  │  │ ...       │ ...       │ ...        │ ...        │     │   │
-│  │  │ (500 rows)│           │            │            │     │   │
+│  │  │ Name      │ DOB       │ Employee ID│ Position    │     │   │
+│  │  │ Rahul S.  │ 01/01/90  │ EMP-0001   │ Operator    │     │   │
+│  │  │ Priya K.  │ 15/03/95  │ EMP-0002   │ QC          │     │   │
+│  │  │ ...       │ ...       │ ...        │ ...         │     │   │
+│  │  │ (500 rows)│           │            │             │     │   │
 │  │  └──────────────────────────────────────────────────┘     │   │
 │  └───────────────────────────────────────────────────────────┘   │
 │                           │                                     │
@@ -407,8 +408,8 @@ REST API + WebSocket + SDK
 │                                                        ▼       │
 │  ┌───────────────────────────────────────────────────────────┐   │
 │  │  Output:                                                  │   │
-│  │  ├── /batch_001/HDLD_NguyenVanA.docx                     │   │
-│  │  ├── /batch_001/HDLD_TranVanB.docx                       │   │
+│  │  ├── /batch_001/EMP_RahulSharma.docx                     │   │
+│  │  ├── /batch_001/EMP_PriyaKumar.docx                      │   │
 │  │  ├── /batch_001/...                                       │   │
 │  │  ├── /batch_001/SUMMARY.xlsx (tracking sheet)             │   │
 │  │  └── /batch_001/ALL.zip (download all)                    │   │
@@ -425,98 +426,99 @@ REST API + WebSocket + SDK
 ```
 Template Categories:
 │
-├── 📁 Hp ng (Contracts)
-│   ├── hop_dong_lao_dong (HL xc regulation/khng xc regulation time hn)
-│   ├── hop_dong_thu_viec (H th vic)
-│   ├── hop_dong_dich_vu (H dch v)
-│   ├── hop_dong_mua_ban (H mua bn hng ha)
-│   ├── hop_dong_thue (H thu mt bng/thit b)
-│   ├── hop_dong_hop_tac (H hp tc kinh doanh)
-│   ├── hop_dong_dai_ly (H i l/phn phi)
-│   ├── hop_dong_vay (H vay vn)
-│   ├── hop_dong_gia_cong (H gia cng)
-│   └── hop_dong_nhuong_ruleen (H nhng rulen)
+├── 📁 Contracts
+│   ├── employment_contract (Permanent / fixed-term employment contract)
+│   ├── probation_agreement (Probation terms)
+│   ├── service_agreement (Service agreement)
+│   ├── sale_of_goods_agreement (Sale of goods — Sale of Goods Act 1930)
+│   ├── lease_agreement (Lease of premises/equipment — Transfer of Property Act 1882)
+│   ├── joint_venture_agreement (Business cooperation / joint venture)
+│   ├── agency_agreement (Agency / distribution)
+│   ├── loan_agreement (Loan agreement)
+│   ├── job_work_agreement (Job work / contract manufacturing)
+│   └── franchise_agreement (Franchise agreement)
 │
-├── 📁 Ph lc (Appendices)
-│   ├── phu_luc_gia_han (Gia hn H)
-│   ├── phu_luc_sua_doi (Sa i iu khon)
-│   ├── phu_luc_bo_sung (B sung iu khon)
-│   ├── phu_luc_thanh_ly (Thanh l H)
-│   └── phu_luc_cham_dut (Chm dt H)
+├── 📁 Addenda (Appendices)
+│   ├── addendum_extension (Contract extension)
+│   ├── addendum_amendment (Amendment of terms)
+│   ├── addendum_supplement (Additional terms)
+│   ├── addendum_settlement (Final settlement / closure of contract)
+│   └── addendum_termination (Contract termination)
 │
-├── 📁 Quyt regulation (Decisions)
-│   ├── ruleet_dinh_tuyen_dung (Tuyn dng)
-│   ├── ruleet_dinh_bo_nhiem (B nhim)
-│   ├── ruleet_dinh_tang_luong (Tng lng)
-│   ├── ruleet_dinh_ky_luat (K lut)
-│   ├── ruleet_dinh_sa_thai (Sa thi)
-│   ├── ruleet_dinh_nghi_viec (Cho ngh vic)
-│   ├── ruleet_dinh_thuyen_chuyen (Thuyn chuyn)
-│   └── ruleet_dinh_cu_di_cong_tac (C i cng tc)
+├── 📁 HR Letters & Orders (Decisions)
+│   ├── appointment_letter (Hiring / appointment)
+│   ├── designation_order (Appointment to a position / promotion)
+│   ├── salary_revision_letter (Salary increment)
+│   ├── disciplinary_order (Disciplinary action after domestic enquiry)
+│   ├── dismissal_order (Dismissal for misconduct)
+│   ├── relieving_letter (Separation / relieving)
+│   ├── transfer_order (Transfer)
+│   └── deputation_order (Deputation / business travel)
 │
-├── 📁 Ni rule & Quy ch (Policies)
-│   ├── noi_rule_lao_dong (Ni rule lao ng)
-│   ├── rule_che_luong (Quy ch lng thng)
-│   ├── rule_che_tai_chinh (Quy ch ti chnh)
-│   ├── rule_trinh_tuyen_dung (Quy trnh tuyn dng)
-│   ├── rule_trinh_dao_tao (Quy trnh o to)
-│   └── thoa_uoc_lao_dong (Tha c LTT)
+├── 📁 Standing Orders & Policies (Policies)
+│   ├── standing_orders (Standing orders — Industrial Employment (Standing Orders) Act 1946)
+│   ├── salary_policy (Salary & bonus policy)
+│   ├── finance_policy (Financial policy)
+│   ├── recruitment_procedure (Recruitment procedure)
+│   ├── training_procedure (Training procedure)
+│   ├── posh_policy (Prevention of sexual harassment — POSH Act 2013)
+│   └── settlement_agreement (Memorandum of settlement with union — Industrial Relations Code 2020)
 │
-├── 📁 Cng vn & n t (Correspondence)
-│   ├── cong_van (Cng vn)
-│   ├── giay_uy_ruleen (Giy y rulen)
-│   ├── don_xin_nghi (n xin ngh php)
-│   ├── don_khieu_nai (n khiu ni)
-│   ├── thu_moi (Th mi)
-│   └── thong_bao (Thng bo)
+├── 📁 Letters & Applications (Correspondence)
+│   ├── official_letter (Official letter)
+│   ├── power_of_attorney (Power of attorney)
+│   ├── leave_application (Leave application)
+│   ├── complaint_letter (Complaint / grievance)
+│   ├── invitation_letter (Invitation letter)
+│   └── notice (Notice)
 │
-├── 📁 Bin bn (Minutes)
-│   ├── bien_ban_hop (Bin bn hp)
-│   ├── bien_ban_giao_nhan (Bin bn giao nhn)
-│   ├── bien_ban_vi_pham (Bin bn vi phm)
-│   ├── bien_ban_kiem_tra (Bin bn kim tra)
-│   └── nghi_ruleet (Ngh rulet)
+├── 📁 Minutes & Records (Minutes)
+│   ├── meeting_minutes (Meeting minutes)
+│   ├── handover_record (Handover / delivery record)
+│   ├── incident_record (Misconduct / incident record)
+│   ├── inspection_record (Inspection record)
+│   └── board_resolution (Board resolution — Companies Act 2013)
 │
-└── 📁 Bo co (Reports)
-    ├── bao_cao_bhxh (Bo co BHXH)
-    ├── bao_cao_thue_tncn (Bo co thu TNCN)
-    ├── bao_cao_lao_dong (Bo co lao ng)
-    └── bao_cao_pccc (Bo co PCCC)
+└── 📁 Reports (Reports)
+    ├── epf_esi_return (EPF / ESI monthly returns)
+    ├── tds_return (TDS returns — Income Tax Act 1961)
+    ├── labour_return (Annual / half-yearly labour returns)
+    └── fire_safety_report (Fire safety compliance report)
 
 Template Schema (JSON):
 {
-  "id": "hop_dong_lao_dong",
-  "name": "Hp ng Lao ng",
+  "id": "employment_contract",
+  "name": "Employment Contract",
   "category": "contracts",
   "version": "2.0",
-  "legal_basis": ["iu 13-24, BLL 2019", "N 145/2020/N-CP"],
+  "legal_basis": ["Indian Contract Act 1872", "Code on Wages 2019", "Industrial Relations Code 2020", "Code on Social Security 2020"],
   "variables": [
     {"key": "company_name", "label": "Company Name", "type": "text", "required": true},
-    {"key": "company_address", "label": "a ch", "type": "text", "required": true},
-    {"key": "company_tax_code", "label": "Tax Code", "type": "text", "required": true},
-    {"key": "representative", "label": "Ngi i din", "type": "text", "required": true},
+    {"key": "company_address", "label": "Registered Address", "type": "text", "required": true},
+    {"key": "company_tax_code", "label": "GSTIN / PAN", "type": "text", "required": true},
+    {"key": "representative", "label": "Authorised Signatory", "type": "text", "required": true},
     {"key": "representative_title", "label": "Position", "type": "text", "required": true},
-    {"key": "employee_name", "label": "H tn NL", "type": "text", "required": true},
+    {"key": "employee_name", "label": "Employee Name", "type": "text", "required": true},
     {"key": "employee_dob", "label": "Date of Birth", "type": "date", "required": true},
-    {"key": "employee_cccd", "label": "S CCCD", "type": "text", "required": true},
-    {"key": "employee_address", "label": "a ch NL", "type": "text", "required": true},
-    {"key": "position", "label": "V tr", "type": "text", "required": true},
-    {"key": "department", "label": "B phn", "type": "text"},
-    {"key": "work_location", "label": "a im lm vic", "type": "text", "required": true},
-    {"key": "contract_type", "label": "Loi H", "type": "enum", "options": ["definite", "indefinite", "seasonal"], "required": true},
-    {"key": "term_months", "label": "Thi hn (thng)", "type": "number", "max": 36, "condition": "contract_type == 'definite'"},
-    {"key": "start_date", "label": "Ngy bt u", "type": "date", "required": true},
+    {"key": "employee_pan", "label": "PAN", "type": "text", "required": true},
+    {"key": "employee_address", "label": "Employee Address", "type": "text", "required": true},
+    {"key": "position", "label": "Position", "type": "text", "required": true},
+    {"key": "department", "label": "Department", "type": "text"},
+    {"key": "work_location", "label": "Place of Work", "type": "text", "required": true},
+    {"key": "contract_type", "label": "Employment Type", "type": "enum", "options": ["permanent", "fixed_term", "temporary"], "required": true},
+    {"key": "term_months", "label": "Term (months)", "type": "number", "condition": "contract_type == 'fixed_term'"},
+    {"key": "start_date", "label": "Start Date", "type": "date", "required": true},
     {"key": "base_salary", "label": "Base Salary", "type": "currency", "required": true, "min": "minimum_wage"},
     {"key": "allowances", "label": "Allowances", "type": "json"},
-    {"key": "working_hours", "label": "Gi lm/tun", "type": "number", "max": 48, "default": 48},
-    {"key": "probation_days", "label": "Th vic (day)", "type": "number", "max": 180}
+    {"key": "working_hours", "label": "Hours/week", "type": "number", "max": 48, "default": 48},
+    {"key": "probation_days", "label": "Probation (days)", "type": "number", "max": 180}
   ],
   "sections": [...],
   "compliance_rules": [
-    {"rule": "term_months <= 36", "message": "HL xc regulation time hn max maximum 36 thng (iu 22)"},
-    {"rule": "base_salary >= minimum_wage", "message": "Lng khng c thp hn level max thiu vng"},
-    {"rule": "working_hours <= 48", "message": "Khng qu 48 gi/tun (iu 105)"},
-    {"rule": "probation_days <= 180", "message": "Th vic max maximum 180 day cho v tr qun l (iu 25)"}
+    {"rule": "base_salary >= minimum_wage", "message": "Wages must not be below the applicable minimum wage (Code on Wages 2019)"},
+    {"rule": "working_hours <= 48", "message": "Working hours must not exceed 48 hours/week (OSH Code 2020)"},
+    {"rule": "probation_days <= 180", "message": "Probation beyond 6 months should be justified under the applicable standing orders"},
+    {"rule": "no_post_employment_non_compete", "message": "Post-employment non-compete clauses are generally void (Section 27, Indian Contract Act 1872)"}
   ]
 }
 ```
@@ -528,52 +530,52 @@ Template Schema (JSON):
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    COMPLIANCE ENGINE                             │
-│         "Cng ty bn maximumng tun th php lut cha?"             │
+│         "Is your company legally compliant?"                    │
 │                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐   │
 │  │  Company Profile:                                         │   │
-│  │  - Ngnh: Sn xut                                        │   │
-│  │  - Quy m: 500 NL                                       │   │
-│  │  - a bn: Bnh Dng                                    │   │
-│  │  - Hot ng: Gia cng in t                            │   │
+│  │  - Industry: Manufacturing                                │   │
+│  │  - Size: 500 employees                                    │   │
+│  │  - Location: Pune, Maharashtra                            │   │
+│  │  - Operations: Electronics assembly                       │   │
 │  └──────────────────────┬────────────────────────────────────┘   │
 │                         │                                       │
 │                         ▼                                       │
 │  ┌───────────────────────────────────────────────────────────┐   │
 │  │  Auto-Generate Compliance Checklist:                      │   │
 │  │                                                           │   │
-│  │  📋 Lao ng                                             │   │
-│  │  ├── ✅ HL cho tt c NL                              │   │
-│  │  ├── ✅ Ni rule lao ng ng k S LTBXH               │   │
-│  │  ├── ⚠️ Tha c LTT (>10 NL → bt buc)             │   │
-│  │  ├── ✅ Bo co lao ng 6 thng/nm                     │   │
-│  │  └── ❌ Quy ch dn ch c s                            │   │
+│  │  📋 Labour                                                │   │
+│  │  ├── ✅ Appointment letters for all employees             │   │
+│  │  ├── ✅ Certified standing orders (IESO Act 1946)         │   │
+│  │  ├── ⚠️ Internal Committee under POSH Act 2013            │   │
+│  │  ├── ✅ Factory licence / Shops & Establishments reg.     │   │
+│  │  └── ❌ Annual returns under labour laws                  │   │
 │  │                                                           │   │
-│  │  📋 BHXH/BHYT/BHTN                                       │   │
-│  │  ├── ✅ ng BHXH cho NL c HL ≥ 1 thng             │   │
-│  │  ├── ⚠️ Khai bo tng/gim L ng hn                  │   │
-│  │  └── ✅ Bo co BHXH regulation k                             │   │
+│  │  📋 EPF / ESI / Gratuity                                  │   │
+│  │  ├── ✅ EPF registration & monthly contributions          │   │
+│  │  ├── ⚠️ ESI coverage for all eligible employees           │   │
+│  │  └── ✅ Gratuity provision (5+ years of service)          │   │
 │  │                                                           │   │
-│  │  📋 An ton lao ng                                     │   │
-│  │  ├── ✅ Hun luyn ATVSL                                │   │
-│  │  ├── ❌ Khm sc khe regulation k (iu 21 Lut ATVSL)      │   │
-│  │  ├── ⚠️ Khai bo tai nn L                              │   │
-│  │  └── ✅ nh gi nguy c ri ro                           │   │
+│  │  📋 Occupational Safety (OSH Code 2020)                   │   │
+│  │  ├── ✅ Safety training for workers                       │   │
+│  │  ├── ❌ Periodic medical examinations                     │   │
+│  │  ├── ⚠️ Accident reporting                                │   │
+│  │  └── ✅ Hazard risk assessment                            │   │
 │  │                                                           │   │
-│  │  📋 PCCC                                                 │   │
-│  │  ├── ✅ Giy chng nhn PCCC                              │   │
-│  │  ├── ⚠️ Kim tra h thng PCCC regulation k                   │   │
-│  │  └── ✅ Tp hun PCCC hng nm                            │   │
+│  │  📋 Fire Safety                                           │   │
+│  │  ├── ✅ Fire NOC                                          │   │
+│  │  ├── ⚠️ Periodic fire system inspection                   │   │
+│  │  └── ✅ Annual fire drills                                │   │
 │  │                                                           │   │
-│  │  📋 Thu                                                 │   │
-│  │  ├── ✅ Khai thu GTGT hng thng/qu                    │   │
-│  │  ├── ✅ Quyt ton thu TNDN                             │   │
-│  │  └── ✅ Quyt ton thu TNCN cho NL                     │   │
+│  │  📋 Tax                                                   │   │
+│  │  ├── ✅ Monthly GST returns (GSTR-1, GSTR-3B)             │   │
+│  │  ├── ✅ Quarterly TDS returns                             │   │
+│  │  └── ✅ Income tax return & tax audit                     │   │
 │  │                                                           │   │
-│  │  📋 Mi trng                                           │   │
-│  │  ├── ⚠️ Giy php x thi (sn xut)                    │   │
-│  │  ├── ✅ nh gi tc ng mi trng                      │   │
-│  │  └── ❌ Bo co BVMT regulation k                             │   │
+│  │  📋 Environment                                           │   │
+│  │  ├── ⚠️ Consent to Operate (State Pollution Control Board)│   │
+│  │  ├── ✅ Environmental impact assessment                   │   │
+│  │  └── ❌ Annual environmental statement                    │   │
 │  │                                                           │   │
 │  │  Score: 72/100 | Issues: 3 critical, 5 warnings           │   │
 │  └───────────────────────────────────────────────────────────┘   │
@@ -581,11 +583,11 @@ Template Schema (JSON):
 │  ┌───────────────────────────────────────────────────────────┐   │
 │  │  Deadline Calendar:                                       │   │
 │  │                                                           │   │
-│  │  📅 15/03 — Np bo co BHXH thng 2                     │   │
-│  │  📅 20/03 — Khai thu GTGT thng 2                       │   │
-│  │  📅 30/03 — Quyt ton thu TNDN 2025                    │   │
-│  │  📅 15/04 — Bo co lao ng Q1                          │   │
-│  │  📅 30/06 — Khm sc khe regulation k                        │   │
+│  │  📅 07/03 — Deposit TDS for February                      │   │
+│  │  📅 11/03 — File GSTR-1 for February                      │   │
+│  │  📅 15/03 — EPF & ESI contributions for February          │   │
+│  │  📅 15/03 — Advance tax (4th instalment)                  │   │
+│  │  📅 20/03 — File GSTR-3B for February                     │   │
 │  └───────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -610,7 +612,7 @@ Template Schema (JSON):
 │                              ▼             ▼                    │
 │                         ┌────────┐    ┌────────┐               │
 │                         │Amend   │    │Renew   │               │
-│                         │(Ph lc)│    │(Gia hn)│               │
+│                         │addendum│    │extend  │               │
 │                         └────────┘    └────────┘               │
 │                                                                 │
 │  Tracking Dashboard:                                            │
@@ -627,31 +629,31 @@ Template Schema (JSON):
 ## 9. Pricing Model (Updated)
 
 ### Pricing Philosophy: 
-> **R hn 90% so vi thu lut s, nhng t hn chatbot thun ty**
-> V chng ta **TO ra gi tr** (vn bn), khng ch tr li cu hi
+> **90% cheaper than retaining a law firm, but priced above a plain chatbot**
+> Because we **CREATE value** (documents), not just answer questions
 
-| Plan | Gi/thng | Bao gm | Target |
+| Plan | Price/month | Includes | Target |
 |---|---|---|---|
-| **Starter** | 2.000.000 | 20 docs + 100 Q&A + 5 reviews | SME < 20 NL |
-| **Business** | 5.000.000 | 100 docs + 500 Q&A + 20 reviews + compliance | SME 20-100 NL |
-| **Enterprise** | 15.000.000 | Unlimited docs + Q&A + batch + API + SLA | DN 100+ NL |
-| **Custom** | Tha thun | White-label, dedicated, training | Tp on |
+| **Starter** | ₹6,999 | 20 docs + 100 Q&A + 5 reviews | SMEs < 20 employees |
+| **Business** | ₹16,999 | 100 docs + 500 Q&A + 20 reviews + compliance | SMEs 20-100 employees |
+| **Enterprise** | ₹49,999 | Unlimited docs + Q&A + batch + API + SLA | Companies 100+ employees |
+| **Custom** | Negotiable | White-label, dedicated, training | Business groups / conglomerates |
 
 ### Add-ons:
-- Batch processing (500+ docs): 500.000/batch
-- Custom template: 2.000.000/template
-- Compliance audit: 3.000.000/ln
-- API integration support: 5.000.000 setup
+- Batch processing (500+ docs): ₹1,999/batch
+- Custom template: ₹6,999/template
+- Compliance audit: ₹9,999/audit
+- API integration support: ₹16,999 setup
 
 ### Actual Cost Comparison:
-| Hng mc | Truyn thng | Legal AI Platform |
+| Item | Traditional | Legal AI Platform |
 |---|---|---|
-| Son 1 HL | 500K-2tr (lut s) | ~10K (AI) |
-| Review 1 H | 2-5tr | ~50K |
-| Ni rule L | 5-15tr | ~200K |
-| Hire Legal Staff | 15-25tr/thng | 5tr/thng (Business plan) |
-| Consult 1 question | 200-500K | ~10K |
-| 500 HL batch | 250tr+ (lut s) | 500K |
+| Draft 1 employment contract | ₹2,000-10,000 (lawyer) | ~₹30 (AI) |
+| Review 1 contract | ₹5,000-20,000 | ~₹150 |
+| Standing orders / HR policy | ₹20,000-60,000 | ~₹700 |
+| Hire Legal Staff | ₹40,000-1,00,000/month | ₹16,999/month (Business plan) |
+| Consult 1 question | ₹1,000-3,000 | ~₹30 |
+| 500 employment contracts batch | ₹10 lakh+ (lawyer) | ₹1,999 |
 
 ---
 
@@ -661,7 +663,7 @@ Template Schema (JSON):
 ```
 ├── Supabase setup + full schema migration
 ├── FastAPI scaffold + auth + rate limiting
-├── Law data pipeline (HuggingFace UTS_VLC → pgvector)
+├── Law data pipeline (India Code / Gazette of India → pgvector)
 ├── RAG engine (hybrid search + reranker)
 ├── Legal Q&A agent (CONSULT module)
 └── Basic API endpoints
@@ -671,11 +673,11 @@ Template Schema (JSON):
 ```
 ├── Template schema system
 ├── Document generation pipeline
-├── 10 core templates (HL, Q, Ni rule...)
+├── 10 core templates (employment contract, appointment letter, standing orders...)
 ├── DOCX/PDF export (python-docx, weasyprint)
 ├── Contract review agent (REVIEW module)
 ├── DRAFT module API endpoints
-└── HRVN beta test
+└── Pilot customer beta test
 ```
 
 ### Phase 3: Batch + Management (Week 9-12)

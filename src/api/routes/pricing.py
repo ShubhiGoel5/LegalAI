@@ -21,12 +21,12 @@ def load_pricing():
         return {"tiers": [], "features_comparison": {}, "addons": []}
 
 @router.get("")
-async def get_pricing(lang: str = Query("vi", pattern="^(vi|en)$")):
+async def get_pricing(lang: str = Query("en", pattern="^(en|hi)$")):
     """
     Get pricing tiers and plans
     
     Query params:
-    - lang: Language (vi or en)
+    - lang: Language (en or hi)
     """
     pricing_data = load_pricing()
     
@@ -37,7 +37,7 @@ async def get_pricing(lang: str = Query("vi", pattern="^(vi|en)$")):
             "id": tier["id"],
             "name": tier.get(f"name_{lang}", tier["name"]) if lang == "en" else tier["name"],
             "price_usd": tier["price_usd"],
-            "price_vnd": tier["price_vnd"],
+            "price_inr": tier["price_inr"],
             "billing": tier.get("billing", "monthly"),
             "description": tier.get(f"description_{lang}", tier.get("description", "")),
             "features": tier["features"],
@@ -67,7 +67,7 @@ async def get_pricing(lang: str = Query("vi", pattern="^(vi|en)$")):
             "id": addon["id"],
             "name": addon.get(f"name_{lang}", addon["name"]) if lang == "en" else addon["name"],
             "price_usd": addon["price_usd"],
-            "price_vnd": addon["price_vnd"]
+            "price_inr": addon["price_inr"]
         })
     
     # Format discounts
@@ -99,7 +99,7 @@ async def get_pricing(lang: str = Query("vi", pattern="^(vi|en)$")):
     }
 
 @router.get("/tiers/{tier_id}")
-async def get_pricing_tier(tier_id: str, lang: str = Query("vi", pattern="^(vi|en)$")):
+async def get_pricing_tier(tier_id: str, lang: str = Query("en", pattern="^(en|hi)$")):
     """Get details of a specific pricing tier"""
     pricing_data = load_pricing()
     
@@ -118,7 +118,7 @@ async def get_pricing_tier(tier_id: str, lang: str = Query("vi", pattern="^(vi|e
         "id": tier["id"],
         "name": tier.get(f"name_{lang}", tier["name"]) if lang == "en" else tier["name"],
         "price_usd": tier["price_usd"],
-        "price_vnd": tier["price_vnd"],
+        "price_inr": tier["price_inr"],
         "billing": tier.get("billing", "monthly"),
         "description": tier.get(f"description_{lang}", tier.get("description", "")),
         "features": tier["features"],
@@ -138,7 +138,7 @@ async def calculate_pricing(
     billing: str = Query("monthly", pattern="^(monthly|annual)$"),
     team_size: int = Query(1, ge=1),
     discount_code: str = Query(None),
-    lang: str = Query("vi", pattern="^(vi|en)$")
+    lang: str = Query("en", pattern="^(en|hi)$")
 ):
     """
     Calculate total pricing with discounts
@@ -163,7 +163,7 @@ async def calculate_pricing(
         from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="Pricing tier not found")
     
-    base_price_vnd = tier["price_vnd"]
+    base_price_inr = tier["price_inr"]
     base_price_usd = tier["price_usd"]
     
     # Check if team size exceeds limit
@@ -172,9 +172,9 @@ async def calculate_pricing(
     if team_limit and team_limit != "unlimited" and team_size > team_limit:
         extra_users = team_size - team_limit
         # Assume extra user cost = 10% of base price per user
-        extra_user_cost_vnd = int(base_price_vnd * 0.1 * extra_users)
+        extra_user_cost_inr = int(base_price_inr * 0.1 * extra_users)
         extra_user_cost_usd = int(base_price_usd * 0.1 * extra_users)
-        base_price_vnd += extra_user_cost_vnd
+        base_price_inr += extra_user_cost_inr
         base_price_usd += extra_user_cost_usd
     
     # Apply billing discount
@@ -195,30 +195,30 @@ async def calculate_pricing(
             discount_reason.append(f"{discount_code.capitalize()}: {code_discount_pct}% off")
     
     # Calculate final price
-    discount_amount_vnd = int(base_price_vnd * discount_percentage / 100)
+    discount_amount_inr = int(base_price_inr * discount_percentage / 100)
     discount_amount_usd = int(base_price_usd * discount_percentage / 100)
     
-    final_price_vnd = base_price_vnd - discount_amount_vnd
+    final_price_inr = base_price_inr - discount_amount_inr
     final_price_usd = base_price_usd - discount_amount_usd
     
     # If annual, multiply by 12
     if billing == "annual":
-        final_price_vnd *= 12
+        final_price_inr *= 12
         final_price_usd *= 12
     
     return {
-        "tier": tier["name"] if lang == "vi" else tier.get("name_en", tier["name"]),
+        "tier": tier["name"] if lang == "hi" else tier.get("name_en", tier["name"]),
         "tier_id": tier_id,
         "billing": billing,
         "team_size": team_size,
-        "base_price_vnd": base_price_vnd,
+        "base_price_inr": base_price_inr,
         "base_price_usd": base_price_usd,
         "discount_percentage": discount_percentage,
         "discount_reason": discount_reason,
-        "discount_amount_vnd": discount_amount_vnd,
+        "discount_amount_inr": discount_amount_inr,
         "discount_amount_usd": discount_amount_usd,
-        "final_price_vnd": final_price_vnd,
+        "final_price_inr": final_price_inr,
         "final_price_usd": final_price_usd,
         "extra_users": extra_users,
-        "currency": "VND" if lang == "vi" else "USD"
+        "currency": "INR"
     }

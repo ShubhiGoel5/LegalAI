@@ -104,7 +104,7 @@ A multi-tenant Legal AI platform for Indian companies. Companies interact via Cl
                     ┌──────────────────┐
                     │   Shared Layer    │
                     │                  │
-                    │  law_documents   │  ← All VN laws
+                    │  law_documents   │  ← All Indian laws
                     │  law_chunks      │  ← Embedded chunks
                     │  law_relations   │  ← Law cross-references
                     └──────────────────┘
@@ -132,11 +132,11 @@ RLS Policy: WHERE company_id = auth.jwt()->>'company_id'
 
 ```
 ┌────────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Source Sites   │     │  Crawler     │     │  Parser      │
-│                 │     │              │     │              │
-│ thuvienphapluat │────▶│ webcrawl.py  │────▶│ law_parser   │
-│ luatindia     │     │ (scrape)     │     │ (extract     │
-│ vanban.gov      │     │              │     │  articles)   │
+│  Source Sites  │     │  Crawler     │     │  Parser      │
+│                │     │              │     │              │
+│ India Code     │────▶│ crawler.py   │────▶│ law_parser   │
+│ Legislative    │     │ (scrape)     │     │ (extract     │
+│ Indian Kanoon  │     │              │     │  sections)   │
 └────────────────┘     └──────────────┘     └──────┬───────┘
                                                    │
                                                    ▼
@@ -181,12 +181,12 @@ User Input
 │  Intent Classifier (LLM)      │
 │                               │
 │  Classify into:               │
-│  ├── LEGAL_QA                 │ → "Thai sn bao lu?"
-│  ├── CONTRACT_REVIEW          │ → "Review hp ng ny"
-│  ├── COMPLIANCE_CHECK         │ → "Cng ty ti c vi phm?"
-│  ├── DOCUMENT_DRAFT           │ → "Son hp ng lao ng"
-│  ├── CASE_RESEARCH            │ → "Tm n l tng t"
-│  └── GENERAL_CHAT             │ → "Cho bn"
+│  ├── LEGAL_QA                 │ → "How long is maternity leave?"
+│  ├── CONTRACT_REVIEW          │ → "Review this contract"
+│  ├── COMPLIANCE_CHECK         │ → "Is my company compliant?"
+│  ├── DOCUMENT_DRAFT           │ → "Draft an employment contract"
+│  ├── CASE_RESEARCH            │ → "Find similar precedents"
+│  └── GENERAL_CHAT             │ → "Hello"
 │                               │
 │  Also extracts:               │
 │  - Legal domain (labor, tax)  │
@@ -244,7 +244,7 @@ User Input
 │  Step 5: FORMAT                                     │
 │  ┌───────────────────────────────────┐              │
 │  │ Response Builder:                 │              │
-│  │ - Clear Indian answer         │              │
+│  │ - Clear plain-English answer      │              │
 │  │ - Structured citations            │              │
 │  │ - Confidence level                │              │
 │  │ - Related topics suggestion       │              │
@@ -269,11 +269,11 @@ User Input
 │  Step 2: CLASSIFY                                   │
 │  ┌───────────────────────────────────┐              │
 │  │ Contract Type Detection:          │              │
-│  │ ├── Employment Contract            │              │
-│  │ ├── Hp ng thng mi          │              │
-│  │ ├── Hp ng thu/mua bn        │              │
-│  │ ├── Service Contract             │              │
-│  │ └── Hp ng hp tc             │              │
+│  │ ├── Employment Contract           │              │
+│  │ ├── Commercial Contract           │              │
+│  │ ├── Lease / Sale Agreement        │              │
+│  │ ├── Service Contract              │              │
+│  │ └── Partnership / JV Agreement    │              │
 │  │                                   │              │
 │  │ → Load relevant law checklist     │              │
 │  └───────────────────┬───────────────┘              │
@@ -281,7 +281,7 @@ User Input
 │  Step 3: EXTRACT                                    │
 │  ┌───────────────────────────────────┐              │
 │  │ Key Clause Extraction:            │              │
-│  │ - Parties (Bn A, Bn B)          │              │
+│  │ - Parties (Party A, Party B)      │              │
 │  │ - Term & Duration                 │              │
 │  │ - Payment terms                   │              │
 │  │ - Obligations & Rights            │              │
@@ -296,7 +296,7 @@ User Input
 │  │ Risk Assessment:                  │              │
 │  │                                   │              │
 │  │ For each clause:                  │              │
-│  │ ├── Compare with VN law           │              │
+│  │ ├── Compare with Indian law       │              │
 │  │ ├── Check for missing clauses     │              │
 │  │ ├── Identify unfair terms         │              │
 │  │ ├── Flag legal violations         │              │
@@ -315,16 +315,16 @@ User Input
 │  │ ┌─ Summary ──────────────────┐    │              │
 │  │ │ Overall Risk: MEDIUM       │    │              │
 │  │ │ Issues Found: 5            │    │              │
-│  │ │ Critical: 1, Warning: 3   │    │              │
-│  │ └───────────────────────────┘    │              │
+│  │ │ Critical: 1, Warning: 3    │    │              │
+│  │ └────────────────────────────┘    │              │
 │  │                                   │              │
 │  │ ┌─ Issue Detail ─────────────┐    │              │
-│  │ │ 🔴 Article 5: Vi phm iu   │    │              │
-│  │ │    22 BLL — H xc regulation  │    │              │
-│  │ │    time hn > 36 thng     │    │              │
-│  │ │    →  xut: Sa thnh   │    │              │
-│  │ │    "khng qu 36 thng"    │    │              │
-│  │ └───────────────────────────┘    │              │
+│  │ │ 🔴 Clause 7: Post-exit     │    │              │
+│  │ │    non-compete is void     │    │              │
+│  │ │    (s.27 Contract Act)     │    │              │
+│  │ │    → Suggest: replace with │    │              │
+│  │ │    confidentiality clause  │    │              │
+│  │ └────────────────────────────┘    │              │
 │  └───────────────────────────────────┘              │
 └─────────────────────────────────────────────────────┘
 ```
@@ -342,9 +342,9 @@ Law Document
 ┌──────────────────────────────┐
 │  Chunking Strategy            │
 │                              │
-│  Level 1: Per Article         │  "iu 41. n phng chm dt..."
-│  Level 2: Per Clause          │  "Khon 1. Ngi s dng L..."
-│  Level 3: Per Point           │  "im a) Khng b tr ng..."
+│  Level 1: Per Article         │  "Section 5. Right to payment of maternity benefit..."
+│  Level 2: Per Clause          │  "(1) Subject to the provisions of this Act..."
+│  Level 3: Per Point           │  "(a) ..." (individual clause / proviso)
 │                              │
 │  Each chunk includes:         │
 │  - Content (text)            │
@@ -392,7 +392,7 @@ WITH semantic AS (
   SELECT id, content, metadata,
          1 - (embedding <=> query_embedding) AS semantic_score
   FROM law_chunks
-  WHERE category && ARRAY['lao_dong']  -- metadata filter
+  WHERE category && ARRAY['labour']  -- metadata filter
   ORDER BY embedding <=> query_embedding
   LIMIT 20
 ),
@@ -400,9 +400,9 @@ WITH semantic AS (
 -- Sparse search (keyword/BM25)
 keyword AS (
   SELECT id, content, metadata,
-         ts_rank_cd(search_vector, plainto_tsquery('indian', :query)) AS keyword_score
+         ts_rank_cd(search_vector, plainto_tsquery('english', :query)) AS keyword_score
   FROM law_chunks
-  WHERE search_vector @@ plainto_tsquery('indian', :query)
+  WHERE search_vector @@ plainto_tsquery('english', :query)
   ORDER BY keyword_score DESC
   LIMIT 20
 ),
@@ -499,7 +499,7 @@ Usage & Billing:
 ```json
 // POST /v1/legal/ask
 {
-  "question": "Nhn vin ngh thai sn c bao lu?",
+  "question": "How many weeks of paid maternity leave is an employee entitled to?",
   "context": {
     "company_type": "manufacturing",
     "employee_count": 500
@@ -507,31 +507,31 @@ Usage & Billing:
   "options": {
     "include_citations": true,
     "include_related": true,
-    "language": "vi"
+    "language": "en"
   }
 }
 
 // Response
 {
-  "answer": "Theo rule regulation php lut n , lao ng n c ngh thai sn 06 thng...",
+  "answer": "Under the Maternity Benefit Act, 1961 (as amended in 2017), a woman employee is entitled to up to 26 weeks of paid maternity leave, of which not more than 8 weeks may precede the expected date of delivery...",
   "confidence": 0.95,
   "citations": [
     {
-      "law": "Code Lao ng 2019",
-      "number": "45/2019/QH14",
-      "article": "iu 139",
-      "clause": "Khon 1",
-      "text": "Lao ng n c ngh thai sn trc v sau khi sinh con l 06 thng...",
-      "effective_date": "2021-01-01",
+      "law": "Maternity Benefit Act, 1961",
+      "number": "Act No. 53 of 1961",
+      "article": "Section 5",
+      "clause": "Sub-section (3)",
+      "text": "The maximum period for which any woman shall be entitled to maternity benefit shall be twenty-six weeks of which not more than eight weeks shall precede the date of her expected delivery...",
+      "effective_date": "2017-04-01",
       "status": "active"
     }
   ],
   "related_topics": [
-    "Ch  BHXH thai sn",
-    "Quyn li lao ng n mang thai",
-    "Cm sa thi lao ng n mang thai"
+    "Eligibility: 80 days of work in the preceding 12 months",
+    "Maternity benefit under the ESI Act, 1948",
+    "Protection against dismissal during maternity leave"
   ],
-  "disclaimer": "Ni dung t vn mang tnh tham kho. Vui lng tham kho  kin lut s cho trng hp c th.",
+  "disclaimer": "This response is for general information only and does not constitute legal advice. Please consult a qualified advocate for your specific situation.",
   "usage": {
     "tokens_used": 1847,
     "cost_usd": 0.0037
@@ -561,27 +561,27 @@ Usage & Billing:
 {
   "overall_risk": "MEDIUM",
   "score": 72,  // out of 100
-  "summary": "Hp ng c 2 iu khon vi phm php lut v 3 iu khon bt li cho ngi lao ng.",
+  "summary": "The contract has 2 clauses that conflict with the law and 3 clauses that are unfavourable to the employee.",
   "issues": [
     {
       "severity": "CRITICAL",
-      "clause": "Article 5 - Thi hn hp ng",
-      "issue": "Hp ng xc regulation time hn 48 thng, vt qu gii hn 36 thng",
-      "law_reference": "iu 22, BLL 2019",
-      "recommendation": "Sa time hn khng qu 36 thng, hoc chuyn thnh H khng xc regulation time hn"
+      "clause": "Clause 7 - Non-compete",
+      "issue": "Restrains the employee from joining a competitor for 24 months after leaving employment",
+      "law_reference": "Section 27, Indian Contract Act, 1872",
+      "recommendation": "Remove the post-employment restraint; rely on confidentiality and non-solicitation obligations instead"
     },
     {
       "severity": "WARNING",
-      "clause": "iu 8 - Chm dt H",
-      "issue": "Thiu rule regulation v time period bo trc khi n phng chm dt",
-      "law_reference": "iu 36, Khon 1, BLL 2019",
-      "recommendation": "B sung: NL bo trc 30-45 day ty loi H"
+      "clause": "Clause 9 - Termination",
+      "issue": "No notice period specified for termination by either party",
+      "law_reference": "Industrial Relations Code, 2020 (retrenchment conditions); applicable State Shops and Establishments Act",
+      "recommendation": "Add a mutual notice period (e.g. 30 days) or pay in lieu of notice"
     }
   ],
   "missing_clauses": [
-    "iu khon v BHXH, BHYT, BHTN",
-    "Quy regulation v ngh php nm",
-    "iu khon bo mt thng tin"
+    "Provident Fund (EPF) and ESI contributions",
+    "Leave entitlements (earned, sick and casual leave)",
+    "Confidentiality and data protection clause"
   ],
   "compliance_status": {
     "labor_code": "PARTIAL",
@@ -732,59 +732,70 @@ Usage & Billing:
 ### 8.1 Law Hierarchy
 
 ```
-Hin php (Constitution)
+Constitution of India
     │
-    ├── Code (Code)
-    │   ├── Code Lao ng 2019
-    │   ├── Code Dn s 2015
-    │   └── Code Hnh s 2015
+    ├── Acts of Parliament (Central) / State Acts
+    │   ├── Code on Wages, 2019
+    │   ├── Industrial Relations Code, 2020
+    │   ├── Code on Social Security, 2020
+    │   ├── Occupational Safety, Health and Working Conditions Code, 2020
+    │   ├── Companies Act, 2013
+    │   ├── Indian Contract Act, 1872
+    │   ├── Maternity Benefit Act, 1961
+    │   ├── Bharatiya Nyaya Sanhita, 2023 (reference only)
+    │   └── State Shops and Establishments Acts
     │
-    ├── Lut (Law)
-    │   ├── Lut Doanh nghip 2020
-    │   ├── Lut u t 2020
-    │   └── Lut Thng mi 2005
+    ├── Rules & Regulations — Central / State Governments, regulators
+    │   ├── Rules framed under the Labour Codes (Central and State)
+    │   ├── Companies (Incorporation) Rules, 2014
+    │   └── SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015
     │
-    ├── Decree (Decree) — Chnh ph
-    │   ├── N 145/2020/N-CP (hng dn BLL)
-    │   └── N 152/2020/N-CP (lao ng nc ngoi)
+    ├── Notifications / Orders / Circulars — Ministries, RBI, SEBI, MCA
+    │   ├── MCA General Circulars
+    │   ├── RBI Master Directions / Circulars
+    │   └── SEBI Circulars
     │
-    ├── Thng t (Circular) — B ngnh
-    │   └── TT 09/2020/TT-BLTBXH
-    │
-    └── Vn bn khc
-        ├── Quyt regulation
-        ├── Ngh rulet
-        └── Cng vn (reference only)
+    └── Gazette of India (official publication — egazette.gov.in)
+        ├── Extraordinary notifications
+        ├── Ordinary notifications
+        └── Office memoranda (reference only)
 ```
+
+**Sources:** India Code (indiacode.nic.in), Legislative Department (legislative.gov.in), eGazette (egazette.gov.in), Indian Kanoon (indiankanoon.org); Supreme Court and High Court judgments as a future source.
 
 ### 8.2 Priority Crawl List (MVP)
 
 ```
-Phase 1 — Labor Law (HRVN use case):
-  ├── Code Lao ng 2019 (45/2019/QH14)
-  ├── N 145/2020/N-CP
-  ├── N 135/2020/N-CP (tui ngh hu)
-  ├── Lut BHXH 2024
-  ├── Lut ATVSL 2015
-  └── Cc thng t hng dn
+Phase 1 — Labour Law (HR / labour use case):
+  ├── Code on Wages, 2019
+  ├── Industrial Relations Code, 2020
+  ├── Code on Social Security, 2020
+  ├── Occupational Safety, Health and Working Conditions Code, 2020
+  ├── Maternity Benefit Act, 1961
+  ├── Sexual Harassment of Women at Workplace (Prevention,
+  │   Prohibition and Redressal) Act, 2013 (POSH)
+  ├── Payment of Gratuity Act, 1972
+  ├── Employees' Provident Funds and Miscellaneous Provisions Act, 1952
+  ├── Employees' State Insurance Act, 1948
+  └── Central / State Rules under the Labour Codes
 
 Phase 2 — Business Law:
-  ├── Lut Doanh nghip 2020
-  ├── Lut u t 2020
-  ├── Lut Thng mi 2005
-  └── Lut Cnh tranh 2018
+  ├── Companies Act, 2013
+  ├── Limited Liability Partnership Act, 2008
+  ├── Foreign Exchange Management Act, 1999
+  └── Competition Act, 2002
 
 Phase 3 — Contract & Civil:
-  ├── Code Dn s 2015
-  ├── Lut Nh  2023
-  ├── Lut Kinh doanh BS 2023
-  └── Lut S hu tr tu 2005
+  ├── Indian Contract Act, 1872
+  ├── Transfer of Property Act, 1882
+  ├── Real Estate (Regulation and Development) Act, 2016
+  └── Copyright Act, 1957
 
 Phase 4 — Tax & Finance:
-  ├── Lut Thu TNCN
-  ├── Lut Thu TNDN
-  ├── Lut Thu GTGT
-  └── Lut K ton 2015
+  ├── Income-tax Act, 1961 / Income-tax Act, 2025
+  ├── Central Goods and Services Tax Act, 2017
+  ├── Integrated Goods and Services Tax Act, 2017
+  └── Companies (Indian Accounting Standards) Rules, 2015
 ```
 
 ---
@@ -836,11 +847,11 @@ Phase 4 — Tax & Finance:
 | Embedding | $0.0001 | OpenAI ada-002 |
 | Supabase DB | $0.00001 | Negligible |
 | Compute | $0.001 | VPS amortized |
-| **Total** | **~$0.009** | **~220 VND/request** |
+| **Total** | **~$0.009** | **~₹0.75/request** |
 
 ### Monthly Cost at Scale
 
-| Users | Requests/mo | LLM Cost | Infra | Total | Revenue (3tr/user) |
+| Users | Requests/mo | LLM Cost | Infra | Total | Revenue (₹10,000/user/mo ≈ $120) |
 |---|---|---|---|---|---|
 | 10 | 5,000 | $45 | $40 | $85 | $1,200 |
 | 50 | 25,000 | $225 | $65 | $290 | $6,000 |

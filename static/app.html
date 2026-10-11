@@ -337,9 +337,10 @@
         .template-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; cursor: pointer; transition: all 0.2s; }
         .template-card:hover { border-color: var(--border-active); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(99,102,241,0.12); }
         .template-category { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .template-category.hop_dong { background: rgba(59,130,246,0.15); color: #60a5fa; }
-        .template-category.hanh_chinh { background: rgba(34,197,94,0.15); color: #4ade80; }
-        .template-category.noi_bo { background: rgba(168,85,247,0.15); color: #c084fc; }
+        .template-category.contract { background: rgba(59,130,246,0.15); color: #60a5fa; }
+        .template-category.administrative { background: rgba(34,197,94,0.15); color: #4ade80; }
+        .template-category.hr { background: rgba(168,85,247,0.15); color: #c084fc; }
+        .template-category.corporate { background: rgba(249,115,22,0.15); color: #fb923c; }
         .template-icon { font-size: 2rem; margin-bottom: 0.75rem; }
         .template-title { font-size: 0.95rem; font-weight: 600; color: var(--text-active); margin-bottom: 0.4rem; }
         .template-description { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
@@ -1688,9 +1689,10 @@
                     </div>
                     <div class="search-filter-pills">
                         <button class="search-filter-pill active" data-domain="" onclick="selectDomain('', this)">All</button>
-                        <button class="search-filter-pill" data-domain="luat" onclick="selectDomain('luat', this)">Law</button>
-                        <button class="search-filter-pill" data-domain="nghi_dinh" onclick="selectDomain('nghi_dinh', this)">Ordinance</button>
-                        <button class="search-filter-pill" data-domain="thong_tu" onclick="selectDomain('thong_tu', this)">Circular</button>
+                        <button class="search-filter-pill" data-domain="constitutional" onclick="selectDomain('constitutional', this)">Constitution</button>
+                        <button class="search-filter-pill" data-domain="labour" onclick="selectDomain('labour', this)">Labour</button>
+                        <button class="search-filter-pill" data-domain="corporate" onclick="selectDomain('corporate', this)">Corporate</button>
+                        <button class="search-filter-pill" data-domain="criminal" onclick="selectDomain('criminal', this)">Criminal</button>
                     </div>
                     <div id="searchResultsSidebar">
                         <div class="empty-state" style="padding: 1.5rem 1rem;">
@@ -1823,9 +1825,9 @@
                         <div class="analytics-header">
                             <h2>📈 Usage Analytics</h2>
                             <select id="analyticsPeriod" onchange="refreshAnalytics()">
-                                <option value="7">7 daysss</option>
-                                <option value="30" selected>30 daysss</option>
-                                <option value="90">90 daysss</option>
+                                <option value="7">7 days</option>
+                                <option value="30" selected>30 days</option>
+                                <option value="90">90 days</option>
                             </select>
                         </div>
                         <div class="analytics-summary">
@@ -2043,12 +2045,12 @@
                             <label class="form-label required">Contract type</label>
                             <select class="form-input" id="contractType" required>
                                 <option value="">Select type</option>
-                                <option value="hop_dong_lao_dong">Employment contract</option>
-                                <option value="hop_dong_dich_vu">Service contract</option>
-                                <option value="hop_dong_thue">Lease contract</option>
-                                <option value="hop_dong_mua_ban">Sale contract</option>
-                                <option value="hop_dong_hop_tac">Partnership contract</option>
-                                <option value="khac">Other</option>
+                                <option value="employment_contract">Employment contract</option>
+                                <option value="service_contract">Service contract</option>
+                                <option value="lease_contract">Lease contract</option>
+                                <option value="sales_contract">Sale contract</option>
+                                <option value="partnership_contract">Partnership contract</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -2293,7 +2295,7 @@
                             <div style="display:flex;justify-content:space-between;"><span>Registered:</span><span id="settingsCreated">—</span></div>
                         </div>
                         <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
-                            <button class="btn btn-primary btn-small" onclick="showToast('Contact: contact@legal-ai.vn', 'info')">⬆️ Upgrade</button>
+                            <button class="btn btn-primary btn-small" onclick="showToast('Contact us: github.com/ShubhiGoel5/LegalAI/issues', 'info')">⬆️ Upgrade</button>
                             <button class="btn btn-secondary btn-small" onclick="logout()">🚪 Log out</button>
                         </div>
                     </div>
@@ -2357,8 +2359,8 @@
         let chatCollapsed = false; // Always start with chat open in VSCode layout
         let activeSidebarPanel = localStorage.getItem('activeSidebarPanel') || 'explorer';
 
-        const categoryIcons = { 'hop_dong': '📝', 'hanh_chinh': '📄', 'noi_bo': '📋' };
-        const categoryNames = { 'hop_dong': 'Contracts', 'hanh_chinh': 'Administrative', 'noi_bo': 'Internal' };
+        const categoryIcons = { 'contract': '📝', 'administrative': '📄', 'hr': '📋', 'corporate': '🏢' };
+        const categoryNames = { 'contract': 'Contracts', 'administrative': 'Administrative', 'hr': 'HR', 'corporate': 'Corporate' };
 
         const toolMeta = {
             'search_law': { icon: '🔍', label: 'Law Search' },
@@ -2806,7 +2808,7 @@
                     </div>
                     <div class="code-example" id="codeExampleCurl">
                         <button class="copy-btn" onclick="copyCode('curl')">📋</button>
-                        <pre><code>curl -X POST https://api.legalai.vn/v1/legal/ask \
+                        <pre><code>curl -X POST ${location.origin}/v1/legal/ask \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the maximum probation period?"}'</code></pre>
@@ -2815,7 +2817,7 @@
                         <button class="copy-btn" onclick="copyCode('python')">📋</button>
                         <pre><code>import requests
 response = requests.post(
-    "https://api.legalai.vn/v1/legal/ask",
+    "${location.origin}/v1/legal/ask",
     headers={"Authorization": "Bearer YOUR_API_KEY"},
     json={"question": "What is the maximum probation period?"}
 )
@@ -2823,7 +2825,7 @@ print(response.json())</code></pre>
                     </div>
                     <div class="code-example hidden" id="codeExampleJavascript">
                         <button class="copy-btn" onclick="copyCode('javascript')">📋</button>
-                        <pre><code>const resp = await fetch('https://api.legalai.vn/v1/legal/ask', {
+                        <pre><code>const resp = await fetch('${location.origin}/v1/legal/ask', {
   method: 'POST',
   headers: { 'Authorization': 'Bearer YOUR_API_KEY', 'Content-Type': 'application/json' },
   body: JSON.stringify({ question: 'What is the maximum probation period?' })
@@ -3464,7 +3466,7 @@ console.log(await resp.json());</code></pre>
             const renderGroup = (label, items) => { if (!items.length) return ''; return `<div class="chat-history-group-label">${label}</div>` + items.map(s => renderChatHistoryItem(s)).join(''); };
             html += renderGroup('Today', groups.today);
             html += renderGroup('Yesterday', groups.yesterday);
-            html += renderGroup('Last 7 daysss', groups.week);
+            html += renderGroup('Last 7 days', groups.week);
             html += renderGroup('Older', groups.older);
             container.innerHTML = html;
         }
@@ -4063,14 +4065,16 @@ console.log(await resp.json());</code></pre>
 
         function getContractStatus(c) {
             if (!c.end_date) return 'active';
-            const dayss = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
+            const days = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
             if (days < 0) return 'expired';
             if (days <= 30) return 'pending';
             return 'active';
         }
 
         function getStatusText(s) { return { 'active': 'Active', 'pending': 'Expiring soon', 'expired': 'Expired', 'uploaded': 'Uploaded', 'processed': 'Processed', 'analyzed': 'Analyzed', 'pending_ocr': 'Pending OCR' }[s] || s; }
-        function getContractTypeText(t) { return { 'hop_dong_lao_dong': 'Employment', 'hop_dong_dich_vu': 'Service', 'hop_dong_thue': 'Lease', 'hop_dong_mua_ban': 'Sale', 'hop_dong_hop_tac': 'Partnership', 'khac': 'Other' }[t] || t; }
+        function getContractTypeText(t) { return { 'employment_contract': 'Employment', 'service_contract': 'Service', 'lease_contract': 'Lease', 'sales_contract': 'Sale', 'partnership_contract': 'Partnership', 'other': 'Other',
+            // legacy values stored before the India migration
+            'hop_dong_lao_dong': 'Employment', 'hop_dong_dich_vu': 'Service', 'hop_dong_thue': 'Lease', 'hop_dong_mua_ban': 'Sale', 'hop_dong_hop_tac': 'Partnership', 'khac': 'Other' }[t] || t; }
         function formatCurrency(v) { if (!v) return '-'; return new Intl.NumberFormat('en-IN').format(v) + ' ₹'; }
         function formatDate(d) { if (!d) return '-'; return new Date(d).toLocaleDateString('en-US'); }
 
@@ -4210,7 +4214,7 @@ console.log(await resp.json());</code></pre>
                     if (data.success && data.metadata) {
                         const m = data.metadata;
                         if (m.title) document.getElementById('contractTitle').value = m.title;
-                        if (m.contract_type) { const ts = document.getElementById('contractType'); if (ts.querySelector(`option[value="${m.contract_type}"]`)) ts.value = m.contract_type; else ts.value = 'khac'; }
+                        if (m.contract_type) { const ts = document.getElementById('contractType'); if (ts.querySelector(`option[value="${m.contract_type}"]`)) ts.value = m.contract_type; else ts.value = 'other'; }
                         if (m.parties?.length) document.getElementById('contractParties').value = m.parties.join(', ');
                         if (m.start_date) document.getElementById('contractStartDate').value = m.start_date;
                         if (m.end_date) document.getElementById('contractEndDate').value = m.end_date;
@@ -4336,9 +4340,9 @@ console.log(await resp.json());</code></pre>
 
             try {
                 const token = localStorage.getItem('token');
-                const searchBody = { query, limit: 20 };
-                if (selectedDomain) searchBody.domain = selectedDomain;
-                const response = await fetch('/v1/legal/search', { method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(searchBody) });
+                const params = new URLSearchParams({ q: query, limit: 20 });
+                if (selectedDomain) params.set('domains', selectedDomain);
+                const response = await fetch(`/v1/legal/search?${params}`, { headers: { 'Authorization': `Bearer ${token}` } });
                 if (response.ok) {
                     const data = await response.json();
                     const results = data.results || [];
@@ -4356,7 +4360,7 @@ console.log(await resp.json());</code></pre>
                     openTabByType('search-results');
                     const center = document.getElementById('searchResultsCenter');
                     if (center) {
-                        center.innerHTML = `<div style="margin-bottom: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">${data.total || results.length} results cho "${escapeHtml(query)}"</div>` +
+                        center.innerHTML = `<div style="margin-bottom: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">${data.total || results.length} results for "${escapeHtml(query)}"</div>` +
                             results.map((r, idx) => {
                                 const snippet = r.content ? r.content.substring(0, 300) : '';
                                 return `<div class="result-card"><div class="result-header"><div class="result-title">${escapeHtml(r.law_title || 'Document')}</div>${r.article_number ? `<div class="result-badge">${escapeHtml(r.article_number)}</div>` : ''}</div><div class="result-excerpt">${escapeHtml(snippet)}</div><div class="result-actions"><button class="btn btn-secondary btn-small" onclick="toggleSearchFull(this, ${idx})">📖 View full text</button><button class="btn btn-primary btn-small" onclick="askAiAboutResult('${escapeHtml(r.law_title || '').replace(/'/g, "\\'")}', '${escapeHtml(r.article_number || '').replace(/'/g, "\\'")}')">💬 Ask AI</button></div><div class="hidden" id="searchFull${idx}" style="margin-top: 0.5rem; padding: 0.75rem; background: var(--code-bg); border-radius: 6px; font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; max-height: 300px; overflow-y: auto;">${escapeHtml(r.content || '')}</div></div>`;
@@ -4589,12 +4593,12 @@ console.log(await resp.json());</code></pre>
                 if (item.timeline_status === 'overdue') { dotClass = 'overdue'; cardClass = ' overdue'; }
                 else if (item.timeline_status === 'expiring_soon') { dotClass = 'expiring-soon'; cardClass = ' expiring-soon'; }
 
-                var dayssText = '';
+                var daysText = '';
                 if (item.days_remaining !== null && item.days_remaining !== undefined) {
-                    if (item.days_remaining < 0) dayssText = '<span style="color: var(--danger); font-weight: 600;">Overdue by ' + Math.abs(item.days_remaining) + ' dayss</span>';
-                    else if (item.days_remaining === 0) dayssText = '<span style="color: var(--warning); font-weight: 600;">Expires today!</span>';
-                    else if (item.days_remaining <= 30) dayssText = '<span style="color: var(--warning);">Remaining ' + item.days_remaining + ' dayss</span>';
-                    else dayssText = 'Remaining ' + item.days_remaining + ' dayss';
+                    if (item.days_remaining < 0) daysText = '<span style="color: var(--danger); font-weight: 600;">Overdue by ' + Math.abs(item.days_remaining) + ' days</span>';
+                    else if (item.days_remaining === 0) daysText = '<span style="color: var(--warning); font-weight: 600;">Expires today!</span>';
+                    else if (item.days_remaining <= 30) daysText = '<span style="color: var(--warning);">Remaining ' + item.days_remaining + ' days</span>';
+                    else daysText = 'Remaining ' + item.days_remaining + ' days';
                 }
 
                 timelineItem.innerHTML = '<div class="timeline-dot ' + dotClass + '"></div>' +
@@ -4603,7 +4607,7 @@ console.log(await resp.json());</code></pre>
                     '<div class="timeline-name">' + escapeHtml(item.name || 'Contracts') + '</div>' +
                     '<div class="timeline-meta">' +
                     '<span>' + getContractTypeText(item.contract_type) + '</span>' +
-                    (daysText ? '<span>' + dayssText + '</span>' : '') +
+                    (daysText ? '<span>' + daysText + '</span>' : '') +
                     '<button class="btn btn-secondary btn-small" onclick="event.stopPropagation(); openContractTab(\'' + item.id + '\')">View</button>' +
                     '</div></div>';
                 container.appendChild(timelineItem);
@@ -5409,18 +5413,18 @@ console.log(await resp.json());</code></pre>
             // Check expiring contracts
             allContracts.forEach(function(c) {
                 if (!c.end_date) return;
-                var dayss = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
-                if (days >= 0 && dayss <= 30) {
+                var days = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
+                if (days >= 0 && days <= 30) {
                     notifications.push({
                         icon: '⚠️',
-                        text: (c.name || c.title || 'Contract') + ' expiring soon (' + dayss + ' dayss)',
+                        text: (c.name || c.title || 'Contract') + ' expiring soon (' + days + ' days)',
                         action: function() { useSuggestion('Check contract ' + (c.name || c.title) + ' expiring soon'); }
                     });
                 }
                 if (days < 0) {
                     notifications.push({
                         icon: '🔴',
-                        text: (c.name || c.title || 'Contract') + ' expired ' + Math.abs(days) + ' dayss',
+                        text: (c.name || c.title || 'Contract') + ' expired ' + Math.abs(days) + ' days',
                         action: function() { useSuggestion('Contracts ' + (c.name || c.title) + ' has expired — what should I do?'); }
                     });
                 }
@@ -5797,17 +5801,17 @@ console.log(await resp.json());</code></pre>
             var riskItems = [];
 
             allContracts.forEach(function(c) {
-                var type = c.contract_type || 'khac';
+                var type = c.contract_type || 'other';
                 byType[type] = (byType[type] || 0) + 1;
 
                 if (c.end_date) {
-                    var dayss = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
+                    var days = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
                     if (days < 0) {
                         expired++;
-                        riskItems.push({ severity: 'critical', name: c.name || c.title || 'Contract', message: 'Expired ' + Math.abs(days) + ' dayss', type: 'expired', id: c.id });
+                        riskItems.push({ severity: 'critical', name: c.name || c.title || 'Contract', message: 'Expired ' + Math.abs(days) + ' days', type: 'expired', id: c.id });
                     } else if (days <= 30) {
                         expiringSoon++;
-                        riskItems.push({ severity: 'warning', name: c.name || c.title || 'Contract', message: 'Remaining ' + dayss + ' dayss', type: 'expiring', id: c.id });
+                        riskItems.push({ severity: 'warning', name: c.name || c.title || 'Contract', message: 'Remaining ' + days + ' days', type: 'expiring', id: c.id });
                     }
                 }
             });
@@ -5863,9 +5867,9 @@ console.log(await resp.json());</code></pre>
         async function refreshAnalytics() {
             var token = localStorage.getItem('token');
             var periodEl = document.getElementById('analyticsPeriod');
-            var dayss = periodEl ? periodEl.value : 30;
+            var days = periodEl ? periodEl.value : 30;
             try {
-                var resp = await fetch('/v1/analytics?days=' + dayss, {
+                var resp = await fetch('/v1/analytics?days=' + days, {
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
                 if (!resp.ok) {
@@ -6239,11 +6243,11 @@ console.log(await resp.json());</code></pre>
             }
             var expiring = allContracts.filter(function(c) {
                 if (!c.end_date) return false;
-                var dayss = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
-                return dayss >= 0 && dayss <= 30;
+                var days = Math.floor((new Date(c.end_date) - new Date()) / 86400000);
+                return days >= 0 && days <= 30;
             });
             if (expiring.length > 0) {
-                insights.push({ icon: '⏰', title: expiring.length + ' contracts expiring soon', description: 'Within the next 30 daysss', severity: 'warning', actionType: 'open_contracts' });
+                insights.push({ icon: '⏰', title: expiring.length + ' contracts expiring soon', description: 'Within the next 30 days', severity: 'warning', actionType: 'open_contracts' });
             }
             if (allContracts.length === 0) {
                 insights.push({ icon: '📄', title: 'No contracts yet', description: 'Upload your first contract to get started', severity: 'info', actionType: 'open_contracts' });
@@ -6452,7 +6456,7 @@ console.log(await resp.json());</code></pre>
             } catch (e) {}
 
             var firstDay = new Date(calYear, calMonth, 1).getDay();
-            var dayssInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+            var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
             var today = new Date();
 
             var html = '';
@@ -6461,7 +6465,7 @@ console.log(await resp.json());</code></pre>
                 html += '<div class="cal-day other-month">' + (prevMonthDays - i) + '</div>';
             }
 
-            for (var d = 1; d <= dayssInMonth; d++) {
+            for (var d = 1; d <= daysInMonth; d++) {
                 var dateStr = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
                 var isToday = today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d;
                 var daysEvents = events.filter(function(e) { return e.date === dateStr; });
@@ -6478,7 +6482,7 @@ console.log(await resp.json());</code></pre>
                 html += '<div class="' + classes + '" onclick="showDayEvents(\'' + dateStr + '\')" title="' + escapeHtml(titles) + '">' + d + '</div>';
             }
 
-            var totalCells = firstDay + dayssInMonth;
+            var totalCells = firstDay + daysInMonth;
             var remaining = 7 - (totalCells % 7);
             if (remaining < 7) {
                 for (var j = 1; j <= remaining; j++) {
@@ -6486,8 +6490,8 @@ console.log(await resp.json());</code></pre>
                 }
             }
 
-            var dayssEl = document.getElementById('calendarDays');
-            if (daysEl) dayssEl.innerHTML = html;
+            var daysEl = document.getElementById('calendarDays');
+            if (daysEl) daysEl.innerHTML = html;
 
             var eventsEl = document.getElementById('calendarEventsList');
             if (eventsEl) {
@@ -6496,7 +6500,7 @@ console.log(await resp.json());</code></pre>
                     var warnClass = e.type === 'end' && e.days_left <= 30 ? 'end-warning' : '';
                     var badge = '';
                     if (e.days_left !== undefined) {
-                        badge = '<div class="cal-event-badge">' + (e.days_left > 0 ? 'Remaining ' + e.days_left + ' dayss' : 'Expired') + '</div>';
+                        badge = '<div class="cal-event-badge">' + (e.days_left > 0 ? 'Remaining ' + e.days_left + ' days' : 'Expired') + '</div>';
                     }
                     return '<div class="cal-event ' + e.type + ' ' + warnClass + '" onclick="openContractTab(\'' + e.contract_id + '\')">' +
                         '<div class="cal-event-date">' + e.date.slice(5) + '</div>' +

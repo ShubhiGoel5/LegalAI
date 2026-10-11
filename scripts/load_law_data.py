@@ -175,7 +175,7 @@ def main():
             continue
         
         title = doc.get("title", "Unknown")
-        doc_type = TYPE_MAP.get(doc.get("type", ""), "luat")
+        doc_type = TYPE_MAP.get(doc.get("type", ""), "act")
         meta = extract_metadata(content)
         domains = detect_domains(title, content)
         

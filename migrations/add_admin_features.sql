@@ -60,5 +60,5 @@ CREATE TABLE IF NOT EXISTS announcements (
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Step 6: Make bi@hrvn.vn a superadmin
-UPDATE users SET role = 'superadmin' WHERE email = 'bi@hrvn.vn';
+-- Step 6: Make your platform owner a superadmin (replace the email before running)
+UPDATE users SET role = 'superadmin' WHERE email = 'admin@example.com';
