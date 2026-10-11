@@ -24,7 +24,7 @@ DB_CONFIG = {
     "sslmode": os.getenv("DB_SSL_MODE", "require")
 }
 
-JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", "your-super-secret-jwt-key-change-in-production")
+JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET") or os.getenv("JWT_SECRET", "your-super-secret-jwt-key-change-in-production")
 
 @contextmanager
 def get_db():

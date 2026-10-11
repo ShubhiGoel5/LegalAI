@@ -19,7 +19,8 @@ import time
 
 def validate_jwt_secret() -> str:
     """Validate JWT secret and reject weak defaults"""
-    JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET")
+    # render.yaml provisions JWT_SECRET; SUPABASE_JWT_SECRET takes precedence when set
+    JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET") or os.getenv("JWT_SECRET")
     
     if not JWT_SECRET or "change-in-production" in JWT_SECRET or len(JWT_SECRET) < 32:
         warnings.warn("⚠️ JWT_SECRET is weak or not set! Set SUPABASE_JWT_SECRET in .env")

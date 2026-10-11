@@ -7,7 +7,7 @@ import httpx
 import uuid
 from pathlib import Path
 
-SUPABASE_URL = os.getenv("SUPABASE_URL", "https://chiokotzjtjwfodryfdt.supabase.co")
+SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
 BUCKET = "documents"
 LOCAL_UPLOAD_DIR = Path("/tmp/legal-ai-agent-uploads/documents")
@@ -41,7 +41,7 @@ async def upload_file(file_bytes: bytes, company_id: str, filename: str) -> dict
     unique_name = f"{company_id}/{uuid.uuid4()}_{filename}"
     ct = _content_type(filename)
 
-    if SUPABASE_SERVICE_KEY:
+    if SUPABASE_URL and SUPABASE_SERVICE_KEY:
         # Upload to Supabase Storage
         url = f"{SUPABASE_URL}/storage/v1/object/{BUCKET}/{unique_name}"
         try:
@@ -70,7 +70,7 @@ async def upload_file(file_bytes: bytes, company_id: str, filename: str) -> dict
 
 async def download_file(storage_path: str) -> bytes:
     """Download file from storage"""
-    if SUPABASE_SERVICE_KEY and not storage_path.startswith("/"):
+    if SUPABASE_URL and SUPABASE_SERVICE_KEY and not storage_path.startswith("/"):
         url = f"{SUPABASE_URL}/storage/v1/object/{BUCKET}/{storage_path}"
         try:
             async with httpx.AsyncClient(timeout=30) as client:
@@ -91,7 +91,7 @@ async def download_file(storage_path: str) -> bytes:
 
 async def get_download_url(storage_path: str, expires_in: int = 3600) -> str:
     """Get signed download URL (Supabase) or local path"""
-    if SUPABASE_SERVICE_KEY and not storage_path.startswith("/"):
+    if SUPABASE_URL and SUPABASE_SERVICE_KEY and not storage_path.startswith("/"):
         url = f"{SUPABASE_URL}/storage/v1/object/sign/{BUCKET}/{storage_path}"
         try:
             async with httpx.AsyncClient(timeout=10) as client:
@@ -114,7 +114,7 @@ async def get_download_url(storage_path: str, expires_in: int = 3600) -> str:
 
 async def delete_file(storage_path: str) -> bool:
     """Delete file from storage"""
-    if SUPABASE_SERVICE_KEY and not storage_path.startswith("/"):
+    if SUPABASE_URL and SUPABASE_SERVICE_KEY and not storage_path.startswith("/"):
         url = f"{SUPABASE_URL}/storage/v1/object/{BUCKET}/{storage_path}"
         try:
             async with httpx.AsyncClient(timeout=10) as client:

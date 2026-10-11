@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, List, AsyncGenerator
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import psycopg2.errors
 import httpx
 import json
 import hashlib
@@ -742,8 +743,19 @@ async def health():
             cur.execute("SELECT count(*) FROM companies")
             status["companies"] = cur.fetchone()[0]
             status["database"] = "connected"
-    except Exception:
+    except psycopg2.OperationalError:
+        # Can't reach Postgres: wrong host/password, paused project, or IPv6-only host
         status["database"] = "error"
+        status["database_error"] = "connection_failed"
+        status["status"] = "degraded"
+    except psycopg2.errors.UndefinedTable:
+        # Connected, but database/init.sql hasn't been run
+        status["database"] = "error"
+        status["database_error"] = "schema_missing"
+        status["status"] = "degraded"
+    except Exception as e:
+        status["database"] = "error"
+        status["database_error"] = type(e).__name__
         status["status"] = "degraded"
     return status
 

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Legal Agent — Smart Legal Assistant for Businesses</title>
-    <meta name="description" content="Law search, contract review, document drafting — an all-in-one legal AI platform for India businesses.">
-    <meta property="og:title" content="AI Legal Agent — Smart Legal Assistant for Businesses">
-    <meta property="og:description" content="Search 40,000+ legal documents, review contracts, and draft legal documents with AI.">
+    <title>Legal AI Agent — AI Legal Assistant for Indian Businesses</title>
+    <meta name="description" content="Ask legal questions, review contracts and draft documents under Indian law, with answers cited from the Constitution of India and Indian Acts.">
+    <meta property="og:title" content="Legal AI Agent — AI Legal Assistant for Indian Businesses">
+    <meta property="og:description" content="Understand contracts and legal questions under Indian law, with citations to the Constitution of India and Indian Acts.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="/static/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -105,10 +105,14 @@
 
         /* Scroll reveal */
         .reveal {
-            opacity: 0; transform: translateY(32px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            opacity: 0; transform: translateY(12px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            *, *::before, *::after { animation: none !important; }
+        }
 
         /* ===== HERO ===== */
         .hero {
@@ -255,9 +259,32 @@
         /* ===== PRICING ===== */
         .pricing { background: linear-gradient(180deg, var(--bg-base), #0c0c14); }
         .pricing-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem; max-width: 1020px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem; max-width: 1200px; margin: 0 auto;
         }
+        @media (max-width: 1100px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; } }
+        .pricing-note { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 1.5rem; }
+
+        /* ===== EXAMPLE ANSWER ===== */
+        .chat-demo {
+            max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem;
+        }
+        .chat-msg {
+            border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem 1.5rem;
+            line-height: 1.7; color: var(--text-secondary);
+        }
+        .chat-msg.user { background: var(--accent-glow); align-self: flex-end; max-width: 85%; color: var(--text); }
+        .chat-msg.ai { background: var(--bg-card); }
+        .chat-msg ul { margin: 0.75rem 0 0 1.25rem; }
+        .chat-msg li { margin-bottom: 0.4rem; }
+        .chat-msg strong { color: var(--text); }
+        .chat-who { display: block; font-size: 0.8rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+        .chat-cites { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .cite {
+            font-size: 0.8rem; padding: 0.3rem 0.7rem; border-radius: 999px;
+            border: 1px solid var(--accent); color: var(--accent); background: var(--accent-glow);
+        }
+        .chat-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; }
         .price-card {
             background: var(--bg-card); border: 1px solid var(--border);
             border-radius: 16px; padding: 2.5rem 2rem; position: relative;
@@ -272,7 +299,7 @@
             position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, var(--accent-dark), var(--accent));
             color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 1rem;
-            border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em;
+            border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
         }
         .price-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
         .price-amount { font-size: 2.2rem; font-weight: 900; margin-bottom: 0.25rem; }
@@ -300,6 +327,7 @@
 
         /* ===== FOOTER ===== */
         footer { padding: 3rem 0 2rem; border-top: 1px solid var(--border); }
+        .footer-disclaimer { text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 1.5rem; }
         .footer-inner {
             display: flex; justify-content: space-between; align-items: center;
             flex-wrap: wrap; gap: 1.5rem;
@@ -359,23 +387,54 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="container hero-content">
-        <div class="hero-badge"><span class="dot"></span> Active — 24/7</div>
-        <h1><span class="gradient-text">Legal AI Agent</span><br>Cursor for Lawyers</h1>
-        <p class="subtitle">24 Smart Legal AI Tools — Law search, contract review, document drafting — all in one platform with Multi-LLM Provider</p>
+        <div class="hero-badge">🇮🇳 Built for Indian law</div>
+        <h1>Understand any contract<br><span class="gradient-text">under Indian law</span></h1>
+        <p class="subtitle">Ask legal questions, review contracts for risky clauses and draft documents in minutes, with answers cited from the Constitution of India and Indian Acts.</p>
         <div class="cta-group">
-            <a href="/static/app.html" class="btn btn-primary">Get Started for free →</a>
-            <a href="#features" class="btn btn-ghost">View demo ▼</a>
+            <a href="/static/app.html" class="btn btn-primary">Get started for free →</a>
+            <a href="#example" class="btn btn-ghost">See an example answer ▼</a>
         </div>
     </div>
 </section>
 
 <!-- STATS BAR -->
 <div class="stats-bar reveal">
-    <div class="stat-item"><span class="stat-val">60,000+</span><span class="stat-lbl">legal documents</span></div>
-    <div class="stat-item"><span class="stat-val">117,000+</span><span class="stat-lbl">knowledge chunks</span></div>
-    <div class="stat-item"><span class="stat-val">24</span><span class="stat-lbl">AI tools</span></div>
-    <div class="stat-item"><span class="stat-val">24/7</span><span class="stat-lbl">available</span></div>
+    <div class="stat-item"><span class="stat-val">Constitution</span><span class="stat-lbl">of India</span></div>
+    <div class="stat-item"><span class="stat-val">Central Acts</span><span class="stat-lbl">from India Code</span></div>
+    <div class="stat-item"><span class="stat-val">IPC &amp; BNS</span><span class="stat-lbl">criminal law reference</span></div>
+    <div class="stat-item"><span class="stat-val">8 templates</span><span class="stat-lbl">Indian contracts</span></div>
 </div>
+
+<!-- EXAMPLE ANSWER -->
+<section class="example" id="example">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Example</p>
+            <h2 class="section-title">Plain answers, with the law cited</h2>
+            <p class="section-subtitle">Every answer points you to the section it relies on, so you can check it yourself.</p>
+        </div>
+        <div class="chat-demo reveal">
+            <div class="chat-msg user">
+                <span class="chat-who">You</span>
+                <p>My employment contract says I can't join a competitor for 2 years after I resign. Is that enforceable?</p>
+            </div>
+            <div class="chat-msg ai">
+                <span class="chat-who">⚖️ Legal AI Agent</span>
+                <p>Generally, <strong>no</strong>. A restriction that applies <em>after</em> your employment ends is usually unenforceable in India.</p>
+                <ul>
+                    <li>Agreements that restrain anyone from carrying on a lawful profession, trade or business are void under <strong>Section 27</strong>.</li>
+                    <li>Indian courts have consistently refused to enforce post-employment non-compete clauses. Restrictions <em>during</em> employment are usually upheld.</li>
+                    <li>Confidentiality obligations and protection of trade secrets can still be enforced after you leave.</li>
+                </ul>
+                <div class="chat-cites">
+                    <span class="cite">Indian Contract Act, 1872 — Section 27</span>
+                    <span class="cite">Constitution of India — Article 19(1)(g)</span>
+                </div>
+                <p class="chat-note">Example for illustration. Not legal advice; consult a qualified advocate for your situation.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- FEATURES -->
 <section class="features" id="features">
@@ -389,7 +448,7 @@
             <div class="feature-card reveal">
                 <span class="feature-icon">💬</span>
                 <h3>Legal AI Chat</h3>
-                <p>Ask any legal question and get answers with specific law citations from 60,000+ documents</p>
+                <p>Ask any legal question and get answers with specific citations to the Constitution of India and Indian Acts</p>
             </div>
             <div class="feature-card reveal">
                 <span class="feature-icon">🔍</span>
@@ -458,51 +517,67 @@
             <h2 class="section-title">Choose the right plan</h2>
             <p class="section-subtitle">Get started for free, upgrade when you need</p>
         </div>
+        <!-- Keep in sync with src/data/pricing.json -->
         <div class="pricing-grid reveal">
             <!-- Free -->
             <div class="price-card">
                 <h3>Free</h3>
-                <div class="price-amount">Free</div>
-                <div class="price-period">Get started now</div>
+                <div class="price-amount">₹0</div>
+                <div class="price-period">Free forever</div>
                 <ul class="price-features">
-                    <li><span class="check">✓</span> 10 questions / days</li>
-                    <li><span class="check">✓</span> 3 contracts</li>
-                    <li><span class="check">✓</span> Basic law search</li>
-                    <li><span class="cross">✗</span> Advanced AI review</li>
-                    <li><span class="cross">✗</span> Export reports</li>
+                    <li><span class="check">✓</span> 10 questions / day</li>
+                    <li><span class="check">✓</span> 1 contract, 5 documents</li>
+                    <li><span class="check">✓</span> Law search</li>
+                    <li><span class="check">✓</span> 2 templates</li>
+                    <li><span class="cross">✗</span> AI contract review</li>
                 </ul>
-                <a href="/static/app.html" class="btn btn-ghost">Get Started for free</a>
+                <a href="/static/app.html" class="btn btn-ghost">Get started for free</a>
             </div>
-            <!-- Pro -->
+            <!-- Starter -->
             <div class="price-card featured">
                 <div class="price-badge">Most popular</div>
-                <h3>Pro</h3>
-                <div class="price-amount">₹4,999<span class="currency"></span></div>
+                <h3>Starter</h3>
+                <div class="price-amount">₹2,400</div>
                 <div class="price-period">/ month</div>
                 <ul class="price-features">
-                    <li><span class="check">✓</span> 100 questions / days</li>
-                    <li><span class="check">✓</span> Unlimited contracts</li>
-                    <li><span class="check">✓</span> Advanced AI review</li>
-                    <li><span class="check">✓</span> Export reports PDF</li>
-                    <li><span class="check">✓</span> Priority support</li>
+                    <li><span class="check">✓</span> 100 questions / day</li>
+                    <li><span class="check">✓</span> 20 contracts, 50 documents</li>
+                    <li><span class="check">✓</span> AI contract review</li>
+                    <li><span class="check">✓</span> All templates</li>
+                    <li><span class="check">✓</span> Export reports, up to 3 users</li>
                 </ul>
                 <a href="/static/app.html" class="btn btn-primary">Try 14 days free →</a>
+            </div>
+            <!-- Professional -->
+            <div class="price-card">
+                <h3>Professional</h3>
+                <div class="price-amount">₹8,200</div>
+                <div class="price-period">/ month</div>
+                <ul class="price-features">
+                    <li><span class="check">✓</span> 500 questions / day</li>
+                    <li><span class="check">✓</span> Unlimited contracts &amp; documents</li>
+                    <li><span class="check">✓</span> API access &amp; custom LLM</li>
+                    <li><span class="check">✓</span> Batch operations</li>
+                    <li><span class="check">✓</span> Up to 10 users, email support</li>
+                </ul>
+                <a href="/static/app.html" class="btn btn-ghost">Try 14 days free →</a>
             </div>
             <!-- Enterprise -->
             <div class="price-card">
                 <h3>Enterprise</h3>
-                <div class="price-amount">Contact</div>
-                <div class="price-period">Custom pricing</div>
+                <div class="price-amount">₹41,500</div>
+                <div class="price-period">/ month, or custom</div>
                 <ul class="price-features">
-                    <li><span class="check">✓</span> Unlimited questions</li>
-                    <li><span class="check">✓</span> API access</li>
-                    <li><span class="check">✓</span> Priority support</li>
-                    <li><span class="check">✓</span> SSO & advanced security</li>
-                    <li><span class="check">✓</span> Dedicated account manager</li>
+                    <li><span class="check">✓</span> Unlimited questions &amp; users</li>
+                    <li><span class="check">✓</span> SLA &amp; dedicated support</li>
+                    <li><span class="check">✓</span> White-label &amp; on-premise option</li>
+                    <li><span class="check">✓</span> Custom integrations</li>
+                    <li><span class="check">✓</span> Team training included</li>
                 </ul>
                 <a href="mailto:shubhigoel5405@gmail.com" class="btn btn-ghost">Contact sales</a>
             </div>
         </div>
+        <p class="pricing-note">Prices exclude GST. 20% off annual billing · 30% off for startups under 2 years old · 50% off for registered non-profits.</p>
     </div>
 </section>
 
@@ -527,10 +602,10 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="mailto:shubhigoel5405@gmail.com">Contact</a></li>
-                <li><a href="#">Terms</a></li>
             </ul>
-            <div class="footer-copy">© 2026 AI Legal Agent. Made with ❤️ in India</div>
+            <div class="footer-copy">© 2026 Legal AI Agent. Made with ❤️ in India</div>
         </div>
+        <p class="footer-disclaimer">Legal AI Agent provides general legal information, not legal advice. Please consult a qualified advocate before acting on it.</p>
     </div>
 </footer>
 
@@ -547,22 +622,15 @@
         a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
 
-    // Intersection Observer for reveal
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                const siblings = entry.target.parentElement.querySelectorAll('.reveal');
-                let delay = 0;
-                siblings.forEach((sib, idx) => {
-                    if (sib === entry.target) delay = idx * 100;
-                });
-                setTimeout(() => entry.target.classList.add('visible'), delay);
-                observer.unobserve(entry.target);
-            }
+    // Reveal sections at or above the viewport. A position check (rather than
+    // IntersectionObserver) also catches sections skipped by anchor jumps.
+    function revealInView() {
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight + 80) el.classList.add('visible');
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+    ['scroll', 'resize', 'hashchange'].forEach(ev => window.addEventListener(ev, revealInView, { passive: true }));
+    revealInView();
 </script>
 
 
