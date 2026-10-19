@@ -534,7 +534,7 @@ def search_laws(query: str, domains: Optional[List[str]] = None, limit: int = 10
         if domains:
             domain_array = "{" + ",".join(domains) + "}"
             cur.execute(
-                "SELECT * FROM search_law(%s, %s::legal_domain[], %s)",
+                "SELECT * FROM search_law(%s, %s::text[], %s)",
                 (query, domain_array, limit)
             )
         else:
@@ -584,7 +584,7 @@ def multi_query_search(question: str, domains: Optional[List[str]] = None, limit
             domain_filter = ""
             params = [f"%{phrase}%"]
             if domains:
-                domain_filter = "AND lc.domains && %s::legal_domain[]"
+                domain_filter = "AND lc.domains::text[] && %s::text[]"
                 params.append("{" + ",".join(domains) + "}")
             
             cur.execute(f"""
@@ -615,7 +615,7 @@ def multi_query_search(question: str, domains: Optional[List[str]] = None, limit
             domain_filter = ""
             params = [f"%{sp}%"]
             if domains:
-                domain_filter = "AND lc.domains && %s::legal_domain[]"
+                domain_filter = "AND lc.domains::text[] && %s::text[]"
                 params.append("{" + ",".join(domains) + "}")
             with get_db() as conn:
                 cur = conn.cursor(cursor_factory=RealDictCursor)

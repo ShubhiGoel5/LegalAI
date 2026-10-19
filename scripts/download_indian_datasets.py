@@ -11,7 +11,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 DATASETS = [
     {
         "name": "indian_constitution.json",
-        "url": "https://raw.githubusercontent.com/Yash-Handa/The_Constitution_Of_India/main/COI.json",
+        "url": "https://raw.githubusercontent.com/Yash-Handa/The_Constitution_Of_India/master/COI.json",
         "type": "constitution"
     },
     {

@@ -1,26 +1,20 @@
-# ⚖️ AI Legal Agent
+# ⚖️ Legal AI Agent
 
-<p align="center">
-  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python"></a>
-</p>
-
-🇮🇳 Made in India
+🇮🇳 Made in India · **Live:** [lega.onrender.com](https://lega.onrender.com)
 
 **AI-powered legal assistant for Indian businesses, grounded in the Constitution of India and Indian statutes**
 
 An AI platform for legal research, contract review, and legal document drafting — all in a VSCode-style interface.
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?style=flat-square)
-![Claude](https://img.shields.io/badge/AI-Claude%20Sonnet-purple?style=flat-square)
+![Render](https://img.shields.io/badge/Deploy-Render-46E3B7?style=flat-square)
 
 ---
 
-
-
 ## ✨ Features
 
-### 🤖 AI Agent (24 Tools)
+### 🤖 AI Agent (25 Tools)
 - **Legal search** — Search across the Constitution of India, Central Acts, IPC/BNS and other Indian legal documents
 - **Contract review** — Risk analysis, missing clauses, amendment suggestions
 - **Compliance check** — Verify employment/commercial/service contracts against Indian law
@@ -31,8 +25,6 @@ An AI platform for legal research, contract review, and legal document drafting 
 - **📂 Full document control** — Read, write, edit, delete, organize documents autonomously
 
 ### 🦾 Agentic AI — Full Document Control
-
-**The AI is now "Cursor for lawyers" — full autonomous document manipulation capabilities.**
 
 Legal AI can autonomously manage your documents and contracts:
 
@@ -67,7 +59,7 @@ The AI can chain multiple tools together to complete complex tasks:
 User: "Edit the penalty clause in Contract ABC to comply with the law"
 AI: 
   1. read_document → Gets current content
-  2. search_law → Finds relevant penalty law (8% max per Commercial Law)
+  2. search_law → Finds the relevant law (Section 74, Indian Contract Act: reasonable compensation)
   3. edit_document → Replaces old penalty clause with compliant version
   4. document_history → Shows what changed
 ```
@@ -80,7 +72,7 @@ AI:
   3. write_document → Saves NDA to folder
 ```
 
-#### New Agentic Tools (11):
+#### Document Tools (11 of the 25):
 1. `list_documents` — List all documents/contracts with search & filter
 2. `read_document` — Read full content or specific sections
 3. `write_document` — Create new documents with metadata & tags
@@ -117,14 +109,14 @@ Upload contracts for instant AI-powered review:
 10. **Force majeure** — Missing or weak force majeure
 
 ### Supported Contract Types
-- Employment (Employment Contract)
-- Lease (Lease Agreement)
-- Sale (Sale Contract)
-- Service (Service Contract)
-- NDA / Confidentiality (NDA / Confidentiality)
-- Loan (Loan Contract)
-- Agency (Agency Contract)
-- Business Cooperation (Business Cooperation)
+- Employment
+- Lease
+- Sale
+- Service
+- NDA / Confidentiality
+- Loan
+- Agency
+- Partnership
 
 ### API Usage
 
@@ -141,42 +133,43 @@ GET /v1/contracts/{contract_id}/review-ai
 **Response structure:**
 ```json
 {
-  "review_id": "review_20250319_143000",
-  "contract_title": "Lease Agreement",
+  "contract_title": "Commercial Lease Agreement",
   "contract_type": "lease",
-  "parties": ["Company A", "Company B"],
+  "parties": ["Acme Pvt Ltd", "Sharma Properties"],
   "risk_score": 72,
   "risk_level": "HIGH",
-  "summary": "Contract has 5 high-risk clauses...",
+  "summary": "Lease with a one-sided penalty clause and no force majeure...",
   "clauses": [
     {
-      "clause_number": "Article 5",
+      "clause_number": "Clause 5",
       "title": "Penalty for breach",
-      "content": "Party B must pay a 20% penalty...",
+      "content": "Lessee must pay 12 months' rent as penalty for any breach...",
       "risk_level": "CRITICAL",
-      "risk_score": 95,
-      "issue": "20% penalty exceeds legal limits",
-      "law_reference": "iu 301 Companies Act 2013: pht ≤ 8%",
-      "suggestion": "Reduce penalty to ≤ 8%"
+      "risk_score": 90,
+      "issue": "Fixed penalty unrelated to actual loss",
+      "law_reference": "Section 74, Indian Contract Act 1872: only reasonable compensation is recoverable",
+      "suggestion": "Replace with a genuine pre-estimate of loss, proportionate to the breach",
+      "category": "penalty"
     }
   ],
   "missing_clauses": [
     {
       "clause": "Force Majeure",
       "importance": "HIGH",
-      "suggestion": "Add Section 56 of Indian Contract Act 1872"
+      "suggestion": "Add a force majeure clause (see Section 56, Indian Contract Act 1872)"
     }
   ],
   "compliance": {
-    "civil_code": {"status": "PARTIAL", "issues": 2},
-    "commercial_law": {"status": "VIOLATION", "issues": 1},
-    "labor_law": {"status": "N/A"}
+    "indian_contract_act_1872": {"status": "PARTIAL", "issues": ["Penalty clause"]},
+    "companies_act_2013": {"status": "N_A", "issues": []},
+    "labour_codes_2020": {"status": "N_A", "issues": []},
+    "consumer_protection_act_2019": {"status": "N_A", "issues": []}
   },
   "recommendations": [
     {
       "priority": 1,
-      "action": "Amend Article 5: reduce penalty 20% → 8%",
-      "reason": "Violation of Section 301 Companies Act 2013"
+      "action": "Amend Clause 5 to a reasonable liquidated damages amount",
+      "reason": "Section 74, Indian Contract Act 1872"
     }
   ]
 }
@@ -218,7 +211,7 @@ The Platform Admin panel provides complete control over your self-hosted Legal A
 
 ```bash
 # Navigate to platform admin
-https://your-domain.com/platform-admin
+https://lega.onrender.com/platform-admin
 
 # Available stats:
 - Total companies, users, documents, contracts
@@ -254,7 +247,7 @@ Legal AI Agent can automatically crawl Indian legal websites to build and update
 #### Supported Sources
 - 📚 **India Code** (indiacode.nic.in) — Official repository of Central and State Acts
 - 🏛️ **Legislative Department** (legislative.gov.in) — Constitution of India and Acts of Parliament
-- 📰 **Gazette of India** (egazette.nic.in) — Official Gazette of India
+- ⚖️ **Indian Kanoon** (indiankanoon.org) — Acts and judgments
 - 🌐 **Any legal website URL** — Custom legal document sources
 
 #### Setup
@@ -286,26 +279,22 @@ POST /crawler/crawl
 - `POST /crawler/batch` — Batch crawl multiple URLs
 - `GET /crawler/status` — Check CrawlKit configuration
 
-#### Pricing
-- **Free:** 100 requests/day *(perfect for getting started)*
-- **Starter:** $19/mo — 10,000 requests
-- **Pro:** $79/mo — 100,000 requests
-
-[Get your free CrawlKit API key →](https://crawlkit.org)
+CrawlKit has a free tier; see [crawlkit.org](https://crawlkit.org) for current limits and pricing.
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.10+
-- PostgreSQL (or Supabase)
-- Claude API key ([console.anthropic.com](https://console.anthropic.com))
+- Python 3.11
+- A [Supabase](https://supabase.com) project (PostgreSQL)
+- An LLM API key: [Groq](https://console.groq.com) or [Gemini](https://aistudio.google.com) for the server default. Users can add their own Claude, OpenAI or Gemini key in Settings.
 
 ### 1. Clone & Install
 
 ```bash
-# Clone your repository and change to the directory
+git clone https://github.com/ShubhiGoel5/LegalAI.git
+cd LegalAI
 pip install -r requirements.txt
 ```
 
@@ -313,19 +302,20 @@ pip install -r requirements.txt
 
 ```bash
 cp .env.example .env
-# Edit .env with your credentials
+# Fill in the Supabase and LLM values in .env
 ```
+
+Use Supabase's **Session pooler** connection details for `SUPABASE_DB_HOST` and `DB_USER` (Connect → Session pooler).
 
 ### 3. Database Setup
 
 ```bash
-# Run migrations
+# Create tables (runs database/init.sql)
 python scripts/run_migration.py
 
-# Load Indian law data (optional: Constitution of India, IPC)
+# Load Indian law data (Constitution of India Parts I-III, IPC 1860)
 python scripts/download_indian_datasets.py
-python scripts/load_law_data.py
-python scripts/index_chunks.py
+python scripts/load_indian_law.py
 ```
 
 ### 4. Run
@@ -334,7 +324,17 @@ python scripts/index_chunks.py
 uvicorn src.api.main:app --host 0.0.0.0 --port 8080
 ```
 
-Open http://localhost:8080/static/app.html
+Open http://localhost:8080 (landing page) or http://localhost:8080/static/app.html (app).
+
+## ☁️ Deploy on Render
+
+The repo includes `render.yaml`:
+
+1. In Render, create a **Blueprint** (or Web Service) from this GitHub repo.
+2. Set the environment variables marked `sync: false` in `render.yaml` (Supabase keys, DB host and password, `GROQ_API_KEY`).
+3. Deploy. Check `https://<your-app>.onrender.com/health`. It should show `"database": "connected"`.
+
+Render's free tier sleeps after 15 minutes without traffic. `.github/workflows/keep-alive.yml` pings `/health` every 10 minutes to keep it awake.
 
 ## 📁 Project Structure
 
@@ -352,23 +352,32 @@ Open http://localhost:8080/static/app.html
 │   │   └── middleware/
 │   │       ├── auth.py          # API key verification
 │   │       └── logging.py       # Usage logging
-│   └── agents/
-│       ├── legal_agent.py       # AI agent with 11 tools
-│       └── company_memory.py    # Company context memory
+│   ├── agents/
+│   │   ├── legal_agent.py       # AI agent with 25 tools
+│   │   └── company_memory.py    # Company context memory
+│   ├── services/
+│   │   ├── llm_provider.py      # Claude / OpenAI / Gemini / Groq / custom
+│   │   └── contract_review.py   # AI contract review
+│   └── data/contract_templates/ # 8 Indian contract templates
 ├── static/
-│   ├── app.html                 # Main SPA (~5600 lines)
+│   ├── app.html                 # Main SPA (~6800 lines)
 │   ├── index.html               # Landing page
-│   ├── admin.html               # Admin dashboard
+│   ├── admin.html               # Company admin dashboard
+│   ├── platform-admin.html      # Platform super admin
 │   └── manifest.json            # PWA manifest
+├── database/
+│   ├── init.sql                 # Full schema
+│   └── migration_search.sql     # Law search function & indexes
 ├── scripts/
-│   ├── load_law_data.py         # Import law documents
-│   ├── index_chunks.py          # Chunk & index for search
-│   └── run_migration.py         # DB migrations
-├── docker-compose.yml           # One-command deploy
-├── Dockerfile                   # Container build
+│   ├── download_indian_datasets.py  # Download Constitution & IPC data
+│   ├── load_indian_law.py       # Load law library into Supabase
+│   └── run_migration.py         # Runs database/init.sql
+├── .github/workflows/
+│   ├── ci.yml                   # Tests
+│   └── keep-alive.yml           # Keeps Render free tier awake
+├── render.yaml                  # Render deployment
 ├── .env.example                 # Environment template
-├── requirements.txt
-└── Procfile                     # Railway/Heroku deploy
+└── requirements.txt
 ```
 
 ## 🔧 API Endpoints
@@ -378,7 +387,8 @@ Open http://localhost:8080/static/app.html
 |--------|----------|-------------|
 | POST | `/v1/auth/register` | Register |
 | POST | `/v1/auth/login` | Login |
-| POST | `/v1/auth/api-key` | Generate API key |
+| GET | `/v1/keys` | List API keys |
+| POST | `/v1/keys` | Generate API key |
 
 ### AI Chat
 | Method | Endpoint | Description |
@@ -390,7 +400,7 @@ Open http://localhost:8080/static/app.html
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/v1/contracts` | List contracts |
-| POST | `/v1/contracts/upload` | Upload contract |
+| POST | `/v1/contracts` | Upload contract |
 | POST | `/v1/contracts/batch-upload` | Batch upload contracts |
 | POST | `/v1/contracts/{id}/review` | AI contract review |
 | POST | `/v1/contracts/{id}/report` | Export Word report |
@@ -421,10 +431,13 @@ Open http://localhost:8080/static/app.html
 
 | Provider | Models | Auth Methods | Context |
 |----------|--------|--------------|---------|
-| 🔵 **Anthropic Claude** | Sonnet 4, Opus 4, Haiku 3.5 | API Key | 200K tokens |
-| 🟢 **OpenAI GPT** | GPT-4o, GPT-4o Mini, O1 | API Key, OAuth | 128-200K tokens |
-| 🔴 **Google Gemini** | Gemini 2.5 Pro/Flash, 2.0 Flash | API Key, OAuth | 1M tokens |
+| 🔵 **Anthropic Claude** | Claude models | API Key | Large |
+| 🟢 **OpenAI GPT** | GPT models | API Key, OAuth | Large |
+| 🔴 **Google Gemini** | Gemini models | API Key, OAuth | Very large |
+| 🟠 **Groq** | Llama 3.3 70B (server default) | API Key (env) | Large |
 | ⚫ **Custom/Local** | Ollama, vLLM, LM Studio | API Key | Variable |
+
+The available models are listed in the app (Settings → AI Provider) and by `GET /v1/llm/models`.
 
 ### Configuration
 
@@ -453,7 +466,7 @@ Open http://localhost:8080/static/app.html
 - 🔄 **OAuth Support:** Automated token management for OpenAI & Google
 - 🛠️ **Tool Normalization:** Function calling formats normalized across providers
 - 💾 **Company-Level Config:** Each company can use different LLM
-- 🔁 **Fallback:** Defaults to `ANTHROPIC_API_KEY` env var if not configured
+- 🔁 **Fallback:** If a company hasn't configured a provider, the server uses `GEMINI_API_KEY`, then `GROQ_API_KEY`
 
 ### Environment Variables
 
@@ -468,20 +481,21 @@ GEMINI_CLIENT_ID=your-google-client-id
 GEMINI_CLIENT_SECRET=your-google-client-secret
 OAUTH_REDIRECT_URI=http://localhost:8080/v1/llm/oauth/callback
 
-# Default fallback (if no provider configured)
-ANTHROPIC_API_KEY=your-anthropic-key
+# Server default LLM (used when a company hasn't configured a provider)
+GEMINI_API_KEY=your-gemini-key        # tried first
+GROQ_API_KEY=your-groq-key            # used if no Gemini key
 ```
 
 ## 💰 Pricing
 
-| Tier | USD | INR | Queries/day | Contracts | Key Features |
-|------|-----|-----|-------------|-----------|--------------|
-| **Free** | $0 | 0₹ | 10 | 1 | Basic search, 2 templates |
-| **Starter** | $29/mo | 725K₹ | 100 | 20 | AI review, all templates |
-| **Professional** | $99/mo | 2.5M₹ | 500 | Unlimited | API, custom LLM, analytics |
-| **Enterprise** | $499/mo | 12.5M₹ | Unlimited | Unlimited | SLA 99.9%, dedicated support |
+| Tier | INR / month | USD / month | Queries/day | Contracts | Key Features |
+|------|-------------|-------------|-------------|-----------|--------------|
+| **Free** | ₹0 | $0 | 10 | 1 | Law search, 2 templates |
+| **Starter** | ₹2,400 | $29 | 100 | 20 | AI review, all templates, up to 3 users |
+| **Professional** | ₹8,200 | $99 | 500 | Unlimited | API, custom LLM, analytics, up to 10 users |
+| **Enterprise** | ₹41,500 | $499 | Unlimited | Unlimited | SLA, dedicated support, white-label |
 
-**Discounts:** Annual -20% · Startups -30% · NGOs -50%
+Prices exclude GST; 14-day free trial, no credit card. **Discounts:** annual −20% · startups under 2 years −30% · registered non-profits −50%. Prices come from `src/data/pricing.json`.
 
 ```bash
 GET /v1/pricing  # Get pricing tiers
@@ -527,21 +541,17 @@ curl "/v1/pricing?lang=hi"
 - **Backend:** FastAPI + Python
 - **AI:** Multi-LLM (Claude, GPT, Gemini, Custom) via unified provider interface
 - **Database:** PostgreSQL (Supabase) with pgvector
-- **Search:** Full-text search + synonym expansion + TF-IDF ranking
+- **Search:** PostgreSQL full-text search + phrase matching + synonym expansion
 - **Frontend:** Vanilla JS SPA (single HTML file)
-- **Deploy:** Railway / Docker / any container host
+- **Deploy:** Render (`render.yaml`)
 
 ## 📝 Indian Law Database
 
-The search engine indexes Indian legal documents including:
-- The Constitution of India (Preamble, Parts, Articles and Schedules)
-- Indian Penal Code 1860 / Bharatiya Nyaya Sanhita 2023
-- Indian Contract Act 1872
-- Companies Act 2013
-- The four Labour Codes (Wages 2019, Industrial Relations 2020, Social Security 2020, OSH 2020)
-- Income Tax Act 1961 and CGST Act 2017
-- Information Technology Act 2000 and Digital Personal Data Protection Act 2023
-- And more Central Acts, Rules and Notifications from India Code
+`scripts/load_indian_law.py` currently loads:
+- **Constitution of India:** Preamble and Articles 1–35 (Parts I–III, including Fundamental Rights)
+- **Indian Penal Code, 1860:** all sections (replaced by the Bharatiya Nyaya Sanhita, 2023 for offences on or after 1 July 2024)
+
+Planned: the rest of the Constitution, BNS 2023, Indian Contract Act 1872, Companies Act 2013, the four Labour Codes, Income Tax and GST Acts, IT Act 2000 and DPDP Act 2023. More Central Acts can be added with the crawler (India Code).
 
 ## 🤝 Contributing
 
